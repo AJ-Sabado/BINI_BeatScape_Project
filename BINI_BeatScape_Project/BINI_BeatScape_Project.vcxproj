@@ -133,15 +133,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="audio.cpp" />
-    <ClCompile Include="highscore.cpp" />
+    <ClCompile Include="leaderboard.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="rendering.cpp" />
+    <ClCompile Include="note.cpp" />
+    <ClCompile Include="render.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.h" />
-    <ClInclude Include="highscore.h" />
-    <ClInclude Include="main.h" />
-    <ClInclude Include="rendering.h" />
+    <ClInclude Include="leaderboard.h" />
+    <ClInclude Include="note.h" />
+    <ClInclude Include="render.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

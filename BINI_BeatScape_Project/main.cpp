@@ -1,14 +1,11 @@
 /*
-This is a temporary solution for rendering while the renderering class is being developed.
+This is currently a temporary solution for rendering while the renderering class is being developed.
+Main will act as controller of all classes in the program
 */
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
 #include <string>
-
-#include "rendering.h"
-#include "audio.h"
-#include "highscore.h"
 
 using std::string;
 using std::cout;
@@ -20,6 +17,9 @@ SDL_Window* gameWindow = NULL;
 SDL_Surface* gameScreenSurface = NULL;
 SDL_Surface* gameBackgroundSurface = NULL;
 
+bool init();
+bool loadMedia();
+void close();
 SDL_Surface* loadSurface(string path);
 
 bool init()
