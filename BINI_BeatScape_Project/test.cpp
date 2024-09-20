@@ -1,6 +1,5 @@
 /*
 This is currently a temporary solution for rendering while the renderering class is being developed.
-Main will act as controller of all classes in the program
 */
 #include <SDL.h>
 #include <SDL_image.h>
