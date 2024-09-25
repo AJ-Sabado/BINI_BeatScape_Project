@@ -1,7 +1,6 @@
 #pragma once
 
-#include "SDL.h"
-#include "SDL_image.h"
+#include "Renderer.h"
 
 namespace BINI
 {
@@ -9,16 +8,17 @@ namespace BINI
 	{
 	public:
 
-		Background();
+		Background(BINI::Renderer* renderer, std::string path);
 
 		~Background();
 
+		void draw(BINI::Renderer* renderer);
 
 	private:
+
 		SDL_Texture* bTexture;
-		int width;
-		int height;
 	};
 }
+
 
 

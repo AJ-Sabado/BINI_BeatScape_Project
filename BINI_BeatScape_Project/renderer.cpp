@@ -1,20 +1,16 @@
 #include "Renderer.h"
 
-BINI::Renderer::Renderer(BINI::Window window)
+BINI::Renderer::Renderer(BINI::Window* window)
 {
-	bRenderer = NULL;
-
-	if (window.getWindow() != NULL)
+	bRenderer = SDL_CreateRenderer(window->getCurrentWindow(), -1, SDL_RENDERER_ACCELERATED);
+	if (bRenderer == NULL)
 	{
-		bRenderer = SDL_CreateRenderer(window.getWindow(), -1, SDL_RENDERER_ACCELERATED);
-		if (bRenderer == NULL)
-		{
-			std::cout << "Unable to create renderer! SDL Error: " << SDL_GetError() << "\n";
-		}
-		else
-		{
-			SDL_SetRenderDrawColor(bRenderer, 255, 255, 255, 255);
-		}
+		std::cout << "Unable to create SDL renderer! SDL Error: " << SDL_GetError() << "\n";
+	}
+	else
+	{
+		SDL_SetRenderDrawColor(bRenderer, 255, 255, 255, 255);
+		std::cout << "SDL renderer created\n";
 	}
 }
 
@@ -24,6 +20,7 @@ BINI::Renderer::~Renderer()
 	{
 		SDL_DestroyRenderer(bRenderer);
 		bRenderer = NULL;
+		std::cout << "SDL renderer destroyed.\n";
 	}
 }
 
@@ -33,10 +30,7 @@ void BINI::Renderer::clearScreen()
 	SDL_RenderClear(bRenderer);
 }
 
-
-void BINI::Renderer::update()
+void BINI::Renderer::updateScreen()
 {
 	SDL_RenderPresent(bRenderer);
 }
-
-

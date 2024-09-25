@@ -7,15 +7,15 @@
 
 namespace BINI 
 {
-	//This class initializes and deinitializes SDL and SDL image.
+	//Initializes SDL application.
 	class Application
 	{
 	public:
 
-		//Initializes SDL.
+		//Application constructor.
 		Application();
 
-		//Deinitializes SDL.
+		//Application deconstructor.
 		~Application();
 
 		//Returns true if SDL and SDL image is initialized.

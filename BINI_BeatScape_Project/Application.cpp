@@ -15,12 +15,18 @@ BINI::Application::Application()
 		std::cout << "SDL image failed to initialize! SDL image Error: " << IMG_GetError() << "\n";
 		success = false;
 	}
+
+	if (success)
+	{
+		std::cout << "SDL and SDL image initialized.\n";
+	}
 }
 
 BINI::Application::~Application()
 {
 	IMG_Quit();
 	SDL_Quit();
+	std::cout << "SDL and SDL image closed.\n";
 }
 
 bool BINI::Application::ready()

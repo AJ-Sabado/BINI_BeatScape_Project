@@ -1,12 +1,12 @@
 #include "Window.h"
 
-BINI::Window::Window(BINI::Application application, int width, int height)
+BINI::Window::Window(BINI::Application* application, int width, int height)
 {
 	SCREEN_WIDTH = 0;
 	SCREEN_HEIGHT = 0;
 	bWindow = NULL;
 
-	if (application.ready())
+	if (application->ready())
 	{
 		SCREEN_WIDTH = width;
 		SCREEN_HEIGHT = height;
@@ -15,6 +15,10 @@ BINI::Window::Window(BINI::Application application, int width, int height)
 		{
 			std::cout << "Unable to create new window. SDL Error: " << SDL_GetError() << "\n";
 		}
+		else
+		{
+			std::cout << "Window created.\n";
+		}
 	}
 }
 
@@ -22,11 +26,7 @@ BINI::Window::~Window()
 {
 	SDL_DestroyWindow(bWindow);
 	bWindow = NULL;
-}
-
-SDL_Window* BINI::Window::getWindow()
-{
-	return bWindow;
+	std::cout << "Window destroyed.\n";
 }
 
 int BINI::Window::getWindowWidth()

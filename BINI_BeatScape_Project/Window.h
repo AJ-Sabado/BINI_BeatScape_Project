@@ -1,26 +1,28 @@
 #pragma once
 
-#include "SDL.h"
-#include "iostream"
 #include "Application.h"
 
 namespace BINI
 {
 	
-	//Wrapper for SDL window.
+	//Contains SDL window.
 	class Window
 	{
 	public:
 
-		//Creates new window.
-		Window(BINI::Application application, int width, int height);
+		//Window constructor.
+		Window(BINI::Application* application, int width, int height);
 
 		//Deallocates created window.
 		~Window();
 
 		//Returns current window.
-		SDL_Window* getWindow();
+		inline SDL_Window* getCurrentWindow() { return bWindow; }
+
+		//Returns window width.
 		int getWindowWidth();
+
+		//Returns window height.
 		int getWindowHeight();
 
 	private:
