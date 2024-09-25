@@ -4,7 +4,7 @@
 #include "SDL_image.h"
 #include "iostream"
 
-
+//Contains all classes and methods for BINI Beatscape Project.
 namespace BINI 
 {
 	//Initializes SDL application.

@@ -9,6 +9,8 @@
 #include "Events.h"
 #include "Background.h"
 
+//Parameters for fine tuning.
+
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
