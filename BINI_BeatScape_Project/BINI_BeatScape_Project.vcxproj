@@ -145,6 +145,7 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="States.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

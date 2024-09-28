@@ -8,28 +8,51 @@
 #include "Renderer.h"
 #include "Events.h"
 #include "Background.h"
+#include "States.h"
 
 //Parameters for fine tuning.
-
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
+//SDL Application
+BINI::Application application;
+
+//Game Window
+BINI::Window window(&application, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+//SDL Renderer
+BINI::Renderer renderer(&window);
+
+//Game Events and States
+BINI::Events events;
+
+//Game objects
+BINI::Background logo(&renderer, "assets/textures/bg.png");
+
+//Current Pointers
+BINI::Background* currentBackground;
+
 int main(int argc, char* args[])
 {
-	BINI::Application application;
-	BINI::Window window(&application, SCREEN_WIDTH, SCREEN_HEIGHT);
-	BINI::Renderer renderer(&window);
-	BINI::Events events;
-
-	BINI::Background background(&renderer, "assets/textures/bg.png");
 
 	while (events.handleEvents())
 	{
 		renderer.clearScreen();
 
-		background.draw(&renderer);
+		//Manages Scenes *may be abstracted soon
+		switch (events.getCurrentState())
+		{
+		case BINI_LOGO:
+			if (currentBackground != &logo)
+			{
+				currentBackground = &logo;
+			}
+			currentBackground->draw(&renderer);
+			break;
+		}
 
 		renderer.updateScreen();
+
 	}
 
 	return 0;
