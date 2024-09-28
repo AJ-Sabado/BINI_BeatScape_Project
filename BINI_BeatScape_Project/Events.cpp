@@ -1,5 +1,9 @@
 #include "Events.h"
 
+BINI::Events::Events()
+{
+	currentState = BINI_LOGO;
+}
 
 bool BINI::Events::handleEvents()
 {
@@ -12,4 +16,9 @@ bool BINI::Events::handleEvents()
 	}
 
 	return true;
+}
+
+int BINI::Events::getCurrentState()
+{
+	return currentState;
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SDL.h"
+#include "States.h"
 
 namespace BINI
 {
@@ -10,12 +11,18 @@ namespace BINI
 	{
 	public:
 
+		Events();
+
 		bool handleEvents();
+
+		int getCurrentState();
 
 	private:
 
 		SDL_Event e;
+		int currentState;
 	};
 }
+
 
 
