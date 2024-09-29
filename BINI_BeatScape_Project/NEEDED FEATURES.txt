@@ -1,0 +1,4 @@
+>Scene wrapper pala dali nalang pag switch ug scenes and automate sa game logic + more abstraction
+>Color modulation
+>GAMEPLAY
+>Saving

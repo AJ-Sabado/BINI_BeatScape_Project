@@ -23,7 +23,7 @@ BINI::Window window(&application, SCREEN_WIDTH, SCREEN_HEIGHT);
 //SDL Renderer
 BINI::Renderer renderer(&window);
 
-//Game Events and States
+//Game Events
 BINI::Events events;
 
 //Game objects
