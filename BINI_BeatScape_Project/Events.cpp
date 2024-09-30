@@ -2,7 +2,7 @@
 
 BINI::Events::Events()
 {
-	currentState = BINI_LOGO;
+	currentState = BINI_START;
 }
 
 bool BINI::Events::handleEvents()

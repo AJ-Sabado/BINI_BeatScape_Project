@@ -7,7 +7,8 @@
 #include "Window.h"
 #include "Renderer.h"
 #include "Events.h"
-#include "Background.h"
+#include "Scene.h"
+#include "MainMenu.h"
 #include "States.h"
 
 //Parameters for fine tuning.
@@ -26,11 +27,11 @@ BINI::Renderer renderer(&window);
 //Game Events
 BINI::Events events;
 
-//Game objects
-BINI::Background logo(&renderer, "assets/textures/bg.png");
+//Scenes
+BINI::MainMenu mainMenu(&renderer);
 
-//Current Pointers
-BINI::Background* currentBackground;
+//Current Scene Pointer
+BINI::Scene* currentScene;
 
 int main(int argc, char* args[])
 {
@@ -42,12 +43,12 @@ int main(int argc, char* args[])
 		//Manages Scenes *may be abstracted soon
 		switch (events.getCurrentState())
 		{
-		case BINI_LOGO:
-			if (currentBackground != &logo)
+		case BINI_START:
+			if (currentScene != &mainMenu)
 			{
-				currentBackground = &logo;
+				currentScene = &mainMenu;
 			}
-			currentBackground->draw(&renderer);
+			currentScene->display(&renderer);
 			break;
 		}
 

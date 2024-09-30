@@ -17,6 +17,7 @@ namespace BINI
 
 		int getCurrentState();
 
+
 	private:
 
 		SDL_Event e;
