@@ -2,39 +2,33 @@
 
 BINI::Background::Background(BINI::Renderer* renderer, std::string path)
 {
-	bTexture = NULL;
-
-	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
-	if (loadedSurface == NULL)
-	{
-		std::cout << "Unable to load image " << path << "! SDl image Error: " << IMG_GetError() << "\n";
-	}
-	else
-	{
-		bTexture = SDL_CreateTextureFromSurface(renderer->getRenderer(), loadedSurface);
-		if (bTexture == NULL)
-		{
-			std::cout << "Unable to create texture from image " << path << "! SDL Error: " << SDL_GetError() << "\n";
-		}
-		else
-		{
-			std::cout << "Background texture created.\n";
-		}
-	}
-	SDL_FreeSurface(loadedSurface);
+	alpha = 0;
+	bTexture = new BINI::Texture(renderer, path);
+	bTexture->setBlendMode(SDL_BLENDMODE_BLEND);
 }
 
 BINI::Background::~Background()
 {
 	if (bTexture != NULL)
 	{
-		SDL_DestroyTexture(bTexture);
+		delete bTexture;
 		bTexture = NULL;
-		std::cout << "Background destroyed.\n";
 	}
 }
 
 void BINI::Background::draw(BINI::Renderer* renderer)
 {
-	SDL_RenderCopy(renderer->getRenderer(), bTexture, NULL, NULL);
+	//fades in on draw
+	if (alpha + 5 >  255)
+	{
+		
+		alpha = 255;
+	}
+	else
+	{
+		alpha += 5;
+	}
+
+	bTexture->setAlpha(alpha);
+	bTexture->render(renderer, 0, 0);
 }

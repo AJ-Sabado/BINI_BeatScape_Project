@@ -2,6 +2,7 @@
 
 #include "SDL.h"
 #include "States.h"
+#include "iostream"
 
 namespace BINI
 {
@@ -21,7 +22,10 @@ namespace BINI
 	private:
 
 		SDL_Event e;
+
 		int currentState;
+
+		void mainMenuControls();
 	};
 }
 

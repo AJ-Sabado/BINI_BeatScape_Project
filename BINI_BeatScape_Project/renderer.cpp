@@ -2,7 +2,12 @@
 
 BINI::Renderer::Renderer(BINI::Window* window)
 {
-	bRenderer = SDL_CreateRenderer(window->getCurrentWindow(), -1, SDL_RENDERER_ACCELERATED);
+
+	maxWidth = window->getWindowWidth();
+
+	maxHeight = window->getWindowHeight();
+
+	bRenderer = SDL_CreateRenderer(window->getCurrentWindow(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (bRenderer == NULL)
 	{
 		std::cout << "Unable to create SDL renderer! SDL Error: " << SDL_GetError() << "\n";
@@ -26,11 +31,21 @@ BINI::Renderer::~Renderer()
 
 void BINI::Renderer::clearScreen()
 {
-	SDL_SetRenderDrawColor(bRenderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(bRenderer, 0, 0, 0, 255);
 	SDL_RenderClear(bRenderer);
 }
 
 void BINI::Renderer::updateScreen()
 {
 	SDL_RenderPresent(bRenderer);
+}
+
+int BINI::Renderer::getMaxWidth()
+{
+	return maxWidth;
+}
+
+int BINI::Renderer::getMaxHeight()
+{
+	return maxHeight;
 }

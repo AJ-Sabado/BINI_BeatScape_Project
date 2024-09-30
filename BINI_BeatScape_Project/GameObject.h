@@ -2,6 +2,9 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+#include "Renderer.h"
+#include "Texture.h"
+#include "string"
 
 namespace BINI
 {
@@ -9,13 +12,15 @@ namespace BINI
 	{
 	public:
 
-		GameObject();
+		GameObject(BINI::Renderer* renderer, std::string path);
 
 		~GameObject();
 
+		void draw(BINI::Renderer* renderer, int x, int y);
+
 	private:
 
-		SDL_Texture* oTexture;
+		BINI::Texture* gTexture;
 	};
 }
 

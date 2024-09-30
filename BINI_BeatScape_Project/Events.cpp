@@ -13,6 +13,16 @@ bool BINI::Events::handleEvents()
 		{
 			return false;
 		}
+		
+		if (e.type == SDL_KEYDOWN)
+		{
+			switch (currentState)
+			{
+			case BINI_START:
+				mainMenuControls();
+				break;
+			}
+		}		
 	}
 
 	return true;
@@ -21,4 +31,9 @@ bool BINI::Events::handleEvents()
 int BINI::Events::getCurrentState()
 {
 	return currentState;
+}
+
+void BINI::Events::mainMenuControls()
+{
+	std::cout << "Key pressed.\n";
 }

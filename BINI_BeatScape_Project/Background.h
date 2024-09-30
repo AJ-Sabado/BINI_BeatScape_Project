@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Renderer.h"
+#include "Texture.h"
 
 namespace BINI
 {
@@ -20,7 +21,11 @@ namespace BINI
 
 	private:
 
-		SDL_Texture* bTexture;
+		//Texture object
+		BINI::Texture* bTexture;
+
+		//Opacity
+		Uint8 alpha;
 	};
 }
 

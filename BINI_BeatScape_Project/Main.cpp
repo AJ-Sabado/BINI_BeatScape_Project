@@ -27,7 +27,7 @@ BINI::Renderer renderer(&window);
 //Game Events
 BINI::Events events;
 
-//Scenes
+//Scenes	*all of which extends the BINI::Scene class
 BINI::MainMenu mainMenu(&renderer);
 
 //Current Scene Pointer
@@ -38,9 +38,10 @@ int main(int argc, char* args[])
 
 	while (events.handleEvents())
 	{
+		//Clears screen
 		renderer.clearScreen();
 
-		//Manages Scenes *may be abstracted soon
+		//Scene manager		*may be abstracted soon
 		switch (events.getCurrentState())
 		{
 		case BINI_START:
@@ -48,10 +49,13 @@ int main(int argc, char* args[])
 			{
 				currentScene = &mainMenu;
 			}
-			currentScene->display(&renderer);
 			break;
 		}
 
+		//Draw current screen
+		currentScene->display(&renderer);
+
+		//Update screen
 		renderer.updateScreen();
 
 	}

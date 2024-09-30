@@ -24,9 +24,17 @@ namespace BINI
 		//Updates all changes to the renderer.
 		void updateScreen();
 
+		//Get renderer bounds
+		int getMaxWidth();
+		int getMaxHeight();
+
 	private:
 
 		SDL_Renderer* bRenderer;
+
+		int maxWidth;
+
+		int maxHeight;
 	};
 }
 
