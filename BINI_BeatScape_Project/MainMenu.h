@@ -2,6 +2,8 @@
 
 #include "Scene.h"
 #include "Background.h"
+#include "Font.h"
+#include "Labels.h"
 #include "Renderer.h"
 
 namespace BINI
@@ -24,6 +26,8 @@ namespace BINI
 	private:
 
 		BINI::Background* bBackground;
+		BINI::Font* menufont;
+		BINI::Labels* start;
 	};
 }
 

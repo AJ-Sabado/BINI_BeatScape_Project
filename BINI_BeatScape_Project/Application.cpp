@@ -15,15 +15,23 @@ BINI::Application::Application()
 		std::cout << "SDL image failed to initialize! SDL image Error: " << IMG_GetError() << "\n";
 		success = false;
 	}
+	
+	if (TTF_Init() == -1)
+	{
+		std::cout << "SDL ttf failed to initialize! SDL ttf Error: " << TTF_GetError() << "\n";
+		success = false;
+	}
 
 	if (success)
 	{
 		std::cout << "SDL and SDL image initialized.\n";
 	}
+
 }
 
 BINI::Application::~Application()
 {
+	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 	std::cout << "SDL and SDL image closed.\n";
