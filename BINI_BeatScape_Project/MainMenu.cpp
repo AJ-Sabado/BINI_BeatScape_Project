@@ -3,9 +3,9 @@
 BINI::MainMenu::MainMenu(BINI::Renderer* renderer)
 {
 	bBackground = new BINI::Background(renderer, "assets/textures/HOME_PAGE_ASSET/HOME_PAGE_MOCKUP.png");
-	menufont = new Font("assets/fonts/BebasNeue-Regular.ttf", 28);
+	menufont = new Font("assets/fonts/BebasNeue-Regular.ttf", 50);
 	SDL_Color textColor = {0, 0, 0};
-	start = new Labels(renderer, menufont, "Start hehehe", textColor);
+	start = new Labels(renderer, menufont, "Hello Worlds", textColor);
 }
 
 BINI::MainMenu::~MainMenu()

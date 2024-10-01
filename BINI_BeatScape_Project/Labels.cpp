@@ -19,8 +19,8 @@ BINI::Labels::Labels(BINI::Renderer* renderer, BINI::Font* font, std::string tex
 		}
 		else
 		{
-			lWidth = textSurface->w;
-			lHeight = textSurface->h;
+			lWidth = textSurface->w * renderer->getMaxWidth() / 1920;
+			lHeight = textSurface->h * renderer->getMaxHeight() / 1080;
 		}
 
 		SDL_FreeSurface(textSurface);
