@@ -3,6 +3,7 @@
 BINI::Application::Application()
 {
 	success = true;
+
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		std::cout << "SDL failed to initialize! SDL Error: " << SDL_GetError() << "\n";
@@ -24,7 +25,7 @@ BINI::Application::Application()
 
 	if (success)
 	{
-		std::cout << "SDL and SDL image initialized.\n";
+		std::cout << "SDL, SDL image, and SDL ttf initialized.\n";
 	}
 
 }
@@ -34,7 +35,7 @@ BINI::Application::~Application()
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
-	std::cout << "SDL and SDL image closed.\n";
+	std::cout << "SDL, SDL image, and SDL ttf closed.\n";
 }
 
 bool BINI::Application::ready()
