@@ -1,51 +1,46 @@
 #pragma once
 
 #include <vector>
-#include <chrono>
-
+#include <memory>
+#include <string>
 #include "Scene.h"
 #include "Background.h"
 #include "Font.h"
 #include "Labels.h"
 #include "Renderer.h"
+#include "Texture.h"
 
-namespace BINI
-{
-	//Main menu scene wrapper.
-	class MainMenu : public BINI::Scene
-	{
-	public:
+namespace BINI {
 
-		//Main menu constructor.
-		MainMenu(BINI::Renderer* renderer);
+    class MainMenu : public Scene {
+    public:
+        explicit MainMenu(Renderer* renderer);
+        ~MainMenu() override = default;
 
-		//Main menu deconstructor.
-		~MainMenu();
+        MainMenu(const MainMenu&) = delete;
+        MainMenu& operator=(const MainMenu&) = delete;
+        MainMenu(MainMenu&&) = delete;
+        MainMenu& operator=(MainMenu&&) = delete;
 
-		virtual void display(BINI::Renderer* renderer);
+        void display(Renderer* renderer) override;
 
-		//virtual bool exitScene(BINI::Renderer* renderer);
+    private:
+        void switchToNextSlide();
+        void initializeBackgrounds(Renderer* renderer);
 
-	private:
-		BINI::Font* menufont;
-		BINI::Labels* start;
+        std::unique_ptr<Font> menuFont;
+        std::unique_ptr<Labels> startLabel;
+        std::unique_ptr<Labels> leaderboardsLabel;
+        std::unique_ptr<Labels> exitLabel;
 
-		//BACKGROUND ASPECT
-		std::vector<BINI::Background*> bBackground;
-		int currentIndex;
-		Uint32 lastSwitchTime;
-		const int slideDuration = 5000;
-		void switchToNextSlide();
+        std::vector<std::unique_ptr<Background>> backgrounds;
+        size_t currentIndex{ 0 };
+        Uint32 lastSwitchTime{ 0 };
+        static constexpr int SLIDE_DURATION{ 5000 };
 
-		//BG FOREGROUND SHADE
-		BINI::Texture* bg_shade;
+        std::unique_ptr<Texture> bgShade;
+        std::unique_ptr<Texture> baseTexture;
+        std::unique_ptr<Texture> biniBeatscapeLogo;
+    };
 
-		//BASE
-		BINI::Texture* baseTexture;
-
-		//LOGO
-		BINI::Texture* biniBeatscapeLogo;
-
-	};
 }
-
