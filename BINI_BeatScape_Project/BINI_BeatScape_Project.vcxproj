@@ -161,6 +161,7 @@
     <ClCompile Include="Music.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SongEasy.cpp" />
+    <ClCompile Include="SoundFX.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SongEasy.h" />
+    <ClInclude Include="SoundFX.h" />
     <ClInclude Include="States.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Window.h" />

@@ -2,6 +2,7 @@
 
 #include "SDL.h"
 #include "States.h"
+#include "SoundFX.h"
 #include "iostream"
 
 namespace BINI
@@ -13,6 +14,8 @@ namespace BINI
 	public:
 		//Events constructor.
 		Events();
+
+		~Events();
 
 		//Handles currently pending events. Returns false if user quits.
 		bool handleEvents();
@@ -29,8 +32,9 @@ namespace BINI
 		//Current application state
 		int currentState;
 
-		//Specific event handling for main menu state
+		//Specific event handling for main menu state		*to be refactored
 		void mainMenuControls();
+
 	};
 }
 

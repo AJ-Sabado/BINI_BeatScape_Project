@@ -5,6 +5,11 @@ BINI::Events::Events()
 	currentState = BINI_START;
 }
 
+BINI::Events::~Events()
+{
+	//Perform cleanup
+}
+
 bool BINI::Events::handleEvents()
 {
 	while (SDL_PollEvent(&e) != 0)
