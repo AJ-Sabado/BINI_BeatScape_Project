@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Renderer.h"
+#include "Events.h"
 
 namespace BINI 
 {
@@ -18,6 +19,7 @@ namespace BINI
 		//Should return false if your scene is done/ready to exit/transition.
 		virtual bool isDone() = 0;
 
+		virtual bool handleEvents(BINI::Events* events) = 0;
 	};
 }
 

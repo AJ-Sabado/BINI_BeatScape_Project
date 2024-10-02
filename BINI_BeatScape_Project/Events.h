@@ -14,15 +14,27 @@ namespace BINI
 	public:
 		//Events constructor.
 		Events();
-
+		
+		//Events deconstructor.
 		~Events();
+		
+		//Polls all pending events.
+		int pollEvents();
 
-		//Handles currently pending events. Returns false if user quits.
-		bool handleEvents();
+		//Returns event type.
+		Uint32 type();
+
+		//Returns key code from an event.
+		Uint32 getKey();
+
+		//Returns true if key is polled repeatedly.
+		bool repeat();
 
 		//Returns current application state.
 		int getCurrentState();
 
+		//Changes application state
+		void setState(int state);
 
 	private:
 
@@ -31,10 +43,6 @@ namespace BINI
 
 		//Current application state
 		int currentState;
-
-		//Specific event handling for main menu state		*to be refactored
-		void mainMenuControls();
-
 	};
 }
 

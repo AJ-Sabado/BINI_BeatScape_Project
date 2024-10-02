@@ -39,7 +39,7 @@ BINI::Scene* currentScene = &mainMenu;
 int main(int argc, char* args[])
 {
 
-	while (events.handleEvents())
+	while (currentScene->handleEvents(&events))
 	{
 		//Clears screen
 		renderer.clearScreen();

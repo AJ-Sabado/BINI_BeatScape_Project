@@ -8,46 +8,35 @@ BINI::Events::Events()
 BINI::Events::~Events()
 {
 	//Perform cleanup
+	currentState = 0;
 }
 
-bool BINI::Events::handleEvents()
+int BINI::Events::pollEvents()
 {
-	while (SDL_PollEvent(&e) != 0)
-	{
-		//User exits
-		if (e.type == SDL_QUIT)
-		{
-			return false;
-		}
-		
-		//State-specific event handlings
-		switch (currentState)
-		{
-		case BINI_START:
-			mainMenuControls();
-			break;
-		}
-	}
+	return SDL_PollEvent(&e);
+}
 
-	return true;
+Uint32 BINI::Events::type()
+{
+	return e.type;
+}
+
+Uint32 BINI::Events::getKey()
+{
+	return e.key.keysym.sym;
+}
+
+void BINI::Events::setState(int state)
+{
+	currentState = state;
+}
+
+bool BINI::Events::repeat()
+{
+	return e.key.repeat;
 }
 
 int BINI::Events::getCurrentState()
 {
 	return currentState;
-}
-
-//Put controls for Main Menu Here
-void BINI::Events::mainMenuControls()
-{
-	//if key is pressed down
-	if (e.type == SDL_KEYDOWN && e.key.repeat == 0)
-	{
-		switch (e.key.keysym.sym)
-		{
-		case SDLK_DOWN:
-			std::cout << "Down key pressed.\n";
-			break;
-		}
-	}
 }

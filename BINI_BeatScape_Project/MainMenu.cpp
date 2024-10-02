@@ -57,8 +57,46 @@ namespace BINI {
         currentIndex = (currentIndex + 1) % backgrounds.size();
     }
 
+    //Returns done var which signifies this scene is ready to exit/transition
     bool MainMenu::isDone()
     {
         return done;
+    }
+    
+    //Handle events here
+    bool MainMenu::handleEvents(BINI::Events* events)
+    {
+        while (events->pollEvents() != 0)
+        {
+            //User exits
+            if (events->type() == SDL_QUIT)
+            {
+                return false;
+            }
+
+            //if key is pressed down
+            if (events->type() == SDL_KEYDOWN && !events->repeat())
+            {
+                switch (events->getKey())
+                {
+                case SDLK_DOWN:
+                    std::cout << "Down key pressed down.\n";
+                    break;
+                }
+            }
+
+            //if key is released
+            if (events->type() == SDL_KEYUP && !events->repeat())
+            {
+                switch (events->getKey())
+                {
+                case SDLK_DOWN:
+                    std::cout << "Down key released.\n";
+                    break;
+                }
+            }
+        }
+
+        return true;
     }
 }

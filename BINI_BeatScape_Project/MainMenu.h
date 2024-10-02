@@ -21,10 +21,11 @@ namespace BINI {
         MainMenu& operator=(const MainMenu&) = delete;
         MainMenu(MainMenu&&) = delete;
         MainMenu& operator=(MainMenu&&) = delete;
-
+        
+        //Inherited Scene functions  *refer to Scene class for more info.
         void display(Renderer* renderer) override;
-
         bool isDone() override;
+        bool handleEvents(BINI::Events* events) override;
 
     private:
         void switchToNextSlide();
