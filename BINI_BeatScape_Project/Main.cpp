@@ -32,7 +32,7 @@ BINI::Events events;
 BINI::MainMenu mainMenu(&renderer);
 
 //Current Scene Pointer
-BINI::Scene* currentScene;
+BINI::Scene* currentScene = &mainMenu;
 
 int main(int argc, char* args[])
 {
@@ -42,9 +42,15 @@ int main(int argc, char* args[])
 		//Clears screen
 		renderer.clearScreen();
 
-		//Scene manager		*may be abstracted soon
+		//Scene manager
 		switch (events.getCurrentState())
 		{
+		case BINI_LOGO:
+			if (currentScene != &mainMenu)
+			{
+				currentScene = &mainMenu;
+			}
+			break;
 		case BINI_START:
 			if (currentScene != &mainMenu)
 			{

@@ -152,9 +152,9 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="CompanyLogo.cpp" />
     <ClCompile Include="Events.cpp" />
     <ClCompile Include="Font.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Labels.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -167,9 +167,9 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="CompanyLogo.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="Font.h" />
-    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Labels.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Renderer.h" />
