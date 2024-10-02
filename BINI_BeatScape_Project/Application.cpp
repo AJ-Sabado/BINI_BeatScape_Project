@@ -23,19 +23,26 @@ BINI::Application::Application()
 		success = false;
 	}
 
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	{
+		std::cout << "SDL mixer failed to initialize! SDL mixer Error: " << Mix_GetError() << "\n";
+		success = false;
+	}
+
 	if (success)
 	{
-		std::cout << "SDL, SDL image, and SDL ttf initialized.\n";
+		std::cout << "SDL, SDL image, SDL ttf, and SDL mixer initialized.\n";
 	}
 
 }
 
 BINI::Application::~Application()
 {
+	Mix_Quit();
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
-	std::cout << "SDL, SDL image, and SDL ttf closed.\n";
+	std::cout << "SDL, SDL image, SDL ttf, and SDL mixer closed.\n";
 }
 
 bool BINI::Application::ready()

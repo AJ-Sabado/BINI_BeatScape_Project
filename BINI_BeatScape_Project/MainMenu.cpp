@@ -4,7 +4,7 @@ BINI::MainMenu::MainMenu(BINI::Renderer* renderer)
 {
 	menufont = new Font("assets/fonts/BebasNeue-Regular.ttf", 50);
 	SDL_Color textColor = {0, 0, 0};
-	start = new Labels(renderer, menufont, "Hello Worlds", textColor);
+	start = new Labels(renderer, menufont, "Hello World", textColor);
 
 	//ASSETS FOR BACKGROUND SLIDESHOW
 	std::vector<std::string> paths = {
@@ -66,6 +66,7 @@ void BINI::MainMenu::display(BINI::Renderer* renderer){
 	logo_rect.h = 750;
 	logo_rect.w = 1125;
 	biniBeatscapeLogo->render(renderer, 80, -78, &logo_rect);
+	start->render(renderer, 0, 0 );
 }
 
 void BINI::MainMenu::switchToNextSlide()
