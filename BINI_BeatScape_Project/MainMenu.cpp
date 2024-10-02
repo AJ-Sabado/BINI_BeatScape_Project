@@ -1,80 +1,59 @@
 #include "MainMenu.h"
+#include <SDL.h>
 
-BINI::MainMenu::MainMenu(BINI::Renderer* renderer)
-{
-	menufont = new Font("assets/fonts/BebasNeue-Regular.ttf", 50);
-	SDL_Color textColor = {0, 0, 0};
-	start = new Labels(renderer, menufont, "Hello World", textColor);
+namespace BINI {
 
-	//ASSETS FOR BACKGROUND SLIDESHOW
-	std::vector<std::string> paths = {
-	"assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_1.png",
-	"assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_2.png",
-	"assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_3.png",
-	"assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_4.png",
-	"assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_5.png",
-	"assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_6.png",
-	"assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_7.png",
-	"assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_8.png"
-	};
-	
-	for (int i = 0; i < paths.size(); i++) {
-		BINI::Background* temp = new BINI::Background(renderer, paths[i]);
-		bBackground.push_back(temp);
-	}
-	
-	//ASSETS FOR THE BASE
-	baseTexture = new BINI::Texture(renderer, "assets/textures/HOME_PAGE_ASSET/HOME_BASE2.png");
+    MainMenu::MainMenu(Renderer* renderer) : menuFont(std::make_unique<Font>("assets/fonts/Steelar-j9Vnj.ttf", 28)) {
+        SDL_Color textColor = { 0, 0, 0, 255 };
+        startLabel = std::make_unique<Labels>(renderer, menuFont.get(), "START", textColor);
+        leaderboardsLabel = std::make_unique<Labels>(renderer, menuFont.get(), "LEADERBOARDS", textColor);
+        exitLabel = std::make_unique<Labels>(renderer, menuFont.get(), "EXIT", textColor);
 
-	//ASSETS FOR LOGO
-	biniBeatscapeLogo = new BINI::Texture(renderer, "assets/Logo/Bini_BeatScape_Logo_Resized.png");
+        initializeBackgrounds(renderer);
 
-	//SHADE Asset
-	bg_shade = new BINI::Texture(renderer, "assets/Cover_Images/SHADE.png");
+        bgShade = std::make_unique<Texture>(renderer, "assets/Cover_Images/SHADE.png");
+        baseTexture = std::make_unique<Texture>(renderer, "assets/textures/HOME_PAGE_ASSET/HOME_BASE2.png");
+        biniBeatscapeLogo = std::make_unique<Texture>(renderer, "assets/Logo/Bini_BeatScape_Logo_Resized.png");
+    }
+
+    void MainMenu::initializeBackgrounds(Renderer* renderer) {
+        const std::vector<std::string> paths = {
+            "assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_1.png",
+            "assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_2.png",
+            "assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_3.png",
+            "assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_4.png",
+            "assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_5.png",
+            "assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_6.png",
+            "assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_7.png",
+            "assets/Cover_Images/MAIN_MENU_EDIT/MAIN_MENU_COVER_8.png"
+        };
+
+        for (const auto& path : paths) {
+            backgrounds.push_back(std::make_unique<Background>(renderer, path));
+        }
+    }
+
+    void MainMenu::display(Renderer* renderer) {
+        Uint32 now = SDL_GetTicks();
+        if (now - lastSwitchTime > SLIDE_DURATION) {
+            switchToNextSlide();
+            lastSwitchTime = now;
+        }
+
+        backgrounds[currentIndex]->draw(renderer);
+        bgShade->render(renderer, 0, 0, nullptr);
+        baseTexture->render(renderer, 0, 0, nullptr);
+
+        SDL_Rect logoRect = { 0, 0, 1125, 750 };
+        biniBeatscapeLogo->render(renderer, 80, -78, &logoRect);
+
+        startLabel->render(renderer, 584, 460);
+        leaderboardsLabel->render(renderer, 513, 500);
+        exitLabel->render(renderer, 600, 540);
+    }
+
+    void MainMenu::switchToNextSlide() {
+        currentIndex = (currentIndex + 1) % backgrounds.size();
+    }
+
 }
-
-BINI::MainMenu::~MainMenu()
-{
-	if (!bBackground.empty())
-	{
-		bBackground.clear();
-	}
-}
-
-void BINI::MainMenu::display(BINI::Renderer* renderer){
-	
-	//SLIDESHOW
-	Uint32 now = SDL_GetTicks();  
-	if (now - lastSwitchTime > slideDuration)
-	{
-		switchToNextSlide();
-		lastSwitchTime = now;  
-	}
-
-	bBackground[currentIndex]->draw(renderer);
-
-	//SHADE;
-	bg_shade->render(renderer,0,0,NULL);
-
-	//BASE
-	baseTexture->render(renderer, 0, 0, NULL);
-
-	//Logo
-	SDL_Rect logo_rect;
-	logo_rect.x = 0;
-	logo_rect.y = 0;
-	logo_rect.h = 750;
-	logo_rect.w = 1125;
-	biniBeatscapeLogo->render(renderer, 80, -78, &logo_rect);
-	start->render(renderer, 0, 0 );
-}
-
-void BINI::MainMenu::switchToNextSlide()
-{
-	currentIndex++;
-	if (currentIndex >= bBackground.size())
-	{
-		currentIndex = 0;
-	}
-}
-
