@@ -15,8 +15,9 @@ namespace BINI
 		//Displays the scene
 		virtual void display(BINI::Renderer* renderer) = 0;
 
-		//Returns true once scene is ready to exit
-		//virtual bool exitScene(BINI::Renderer* renderer) = 0;
+		//Should return false if your scene is done/ready to exit/transition.
+		virtual bool isDone() = 0;
+
 	};
 }
 

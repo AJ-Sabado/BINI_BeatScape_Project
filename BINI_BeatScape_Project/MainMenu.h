@@ -24,6 +24,8 @@ namespace BINI {
 
         void display(Renderer* renderer) override;
 
+        bool isDone() override;
+
     private:
         void switchToNextSlide();
         void initializeBackgrounds(Renderer* renderer);
@@ -41,6 +43,9 @@ namespace BINI {
         std::unique_ptr<Texture> bgShade;
         std::unique_ptr<Texture> baseTexture;
         std::unique_ptr<Texture> biniBeatscapeLogo;
+
+        //Change to true if your scene is ready to exit/transition
+        bool done;
     };
 
 }

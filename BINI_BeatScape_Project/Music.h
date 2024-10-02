@@ -28,6 +28,9 @@ namespace BINI
 		//Resumes music.
 		void resumeMusic();
 
+		//Returns true if music is playing.
+		bool isPlaying();
+
 	private:
 		//Mixer hardware
 		Mix_Music* bMusic;

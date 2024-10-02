@@ -45,20 +45,23 @@ int main(int argc, char* args[])
 		renderer.clearScreen();
 
 		//Scene manager
-		switch (events.getCurrentState())
+		if (currentScene->isDone())
 		{
-		case BINI_LOGO:
-			if (currentScene != &mainMenu)
+			switch (events.getCurrentState())
 			{
-				currentScene = &mainMenu;
+			case BINI_LOGO:
+				if (currentScene != &mainMenu)
+				{
+					currentScene = &mainMenu;
+				}
+				break;
+			case BINI_START:
+				if (currentScene != &mainMenu)
+				{
+					currentScene = &mainMenu;
+				}
+				break;
 			}
-			break;
-		case BINI_START:
-			if (currentScene != &mainMenu)
-			{
-				currentScene = &mainMenu;
-			}
-			break;
 		}
 
 		//Draw current screen

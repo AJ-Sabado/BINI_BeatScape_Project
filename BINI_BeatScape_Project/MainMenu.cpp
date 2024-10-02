@@ -4,6 +4,7 @@
 namespace BINI {
 
     MainMenu::MainMenu(Renderer* renderer) : menuFont(std::make_unique<Font>("assets/fonts/Steelar-j9Vnj.ttf", 28)) {
+        done = false;
         SDL_Color textColor = { 0, 0, 0, 255 };
         startLabel = std::make_unique<Labels>(renderer, menuFont.get(), "START", textColor);
         leaderboardsLabel = std::make_unique<Labels>(renderer, menuFont.get(), "LEADERBOARDS", textColor);
@@ -56,4 +57,8 @@ namespace BINI {
         currentIndex = (currentIndex + 1) % backgrounds.size();
     }
 
+    bool MainMenu::isDone()
+    {
+        return done;
+    }
 }

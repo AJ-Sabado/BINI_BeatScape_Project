@@ -50,3 +50,8 @@ void BINI::Music::pauseMusic()
 		Mix_PauseMusic();
 	}
 }
+
+bool BINI::Music::isPlaying()
+{
+	return !Mix_PausedMusic() || Mix_PlayingMusic();
+}
