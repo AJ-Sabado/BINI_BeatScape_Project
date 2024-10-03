@@ -4,6 +4,7 @@ namespace BINI
 {
 	SongEasy::SongEasy(BINI::Renderer* renderer)
 	{
+		//Textures
 		background = new BINI::Texture(renderer, "assets/Cover_Images/BINI_COVER_6.png");
 		overlay = new BINI::Texture(renderer, "assets/Cover_Images/SHADE.png");
 		titlePanel = new BINI::Texture(renderer, "assets/textures/GAMEPLAY_ASSETS/SONG_TITLE_HEADER.png");
@@ -16,16 +17,31 @@ namespace BINI
 		accuracyPanel->setBlendMode(SDL_BLENDMODE_BLEND);
 		noteTexture->setBlendMode(SDL_BLENDMODE_BLEND);
 
+		//Fonts and Labels
+		steelar = new BINI::Font("assets/fonts/Steelar-j9Vnj.ttf", 24);
+		bebas = new BINI::Font("assets/fonts/BebasNeue-Regular.ttf", 35);
+		SDL_Color black = { 0, 0 ,0 };
+		SDL_Color white = { 255, 255, 255 };
+		hello1 = new BINI::Labels(renderer, steelar, "ISLANG PANTROPIKO", white);
+		hello2 = new BINI::Labels(renderer, bebas, "BINI", black);
+		hello1->setBlendMode(SDL_BLENDMODE_BLEND);
+		hello2->setBlendMode(SDL_BLENDMODE_BLEND);
+
+		//Audio
 		song = new BINI::Music("assets/music/easy1.ogg");
 		sfx = new BINI::SoundFX("assets/sfx/metronome.wav");
+		
+		//Timer
 		timer = new BINI::Timer;
 		timer->stop();
 
+		//Parameters
 		done = false;
 		fadingIn = true;
 		sceneAlpha = 0;
-		beat = 0;
+		beat = 1;
 		noteY = -noteTexture->getHeight();
+		noteVelocity = renderer->getMaxHeight() / 208;
 		
 
 	}
@@ -86,8 +102,6 @@ namespace BINI
 				sceneAlpha = 255;
 				fadingIn = false;
 				timer->start();
-				song->startMusic(0);
-				std::cout << "Song is starting.\n";
 			}
 			else
 			{
@@ -96,11 +110,18 @@ namespace BINI
 		}
 
 		
-
-		if (timer->getTicks() % 625 <= 17 && timer->isStarted())
+		//Metronome
+		if (timer->getTicks() % 625 <= 16 && timer->isStarted() && timer->getTicks() > 625)
 		{
 			std::cout << beat++ << "\n";
-			sfx->playSFX();
+			if (beat <= 8)
+				sfx->playSFX();
+		}
+
+		//Song controls
+		if (beat == 6)
+		{
+			song->startMusic(0);
 		}
 
 		//Set Texture Alphas
@@ -109,14 +130,22 @@ namespace BINI
 		titlePanel->setAlpha(sceneAlpha);
 		accuracyPanel->setAlpha(sceneAlpha);
 		noteTexture->setAlpha(sceneAlpha);
+		hello1->setAlpha(sceneAlpha);
+		hello2->setAlpha(sceneAlpha);
 
 		//Render textures
 		background->render(renderer, 0, 0);
 		overlay->render(renderer, 0, 0);
 		titlePanel->render(renderer, 0, 0);
 		accuracyPanel->render(renderer, renderer->getMaxWidth() - accuracyPanel->getWidth(), renderer->getMaxHeight() - accuracyPanel->getHeight());
-		if (timer->isStarted() && noteY != renderer->getMaxHeight() + noteTexture->getHeight())
-			noteTexture->render(renderer, (renderer->getMaxWidth() / 2) - noteTexture->getWidth(), noteY += 5);		
+		hello1->render(renderer, renderer->getMaxWidth() / 128, renderer->getMaxHeight() / 64);
+		hello2->render(renderer, renderer->getMaxWidth() / 128, titlePanel->getHeight() - (hello2->getHeight() * 5 / 2));
+		
+		if (beat >= 6 && noteY <= renderer->getMaxHeight() + noteTexture->getHeight()) 
+		{
+			noteTexture->render(renderer, (renderer->getMaxWidth() / 2) - noteTexture->getWidth(), noteY += noteVelocity);
+		}
+					
 
 	}
 

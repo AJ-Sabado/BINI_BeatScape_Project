@@ -62,6 +62,12 @@ namespace BINI
         }
     }
 
+    void Timer::restart()
+    {
+        mStartTicks = SDL_GetTicks();
+        mPausedTicks = SDL_GetTicks();
+    }
+
     void Timer::unpause()
     {
         //If the timer is running and paused
