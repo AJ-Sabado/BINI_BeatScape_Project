@@ -2,6 +2,8 @@
 
 BINI::Events::Events()
 {
+	currentState = BINI_START;
+	currentState = BINI_LOGO;
 	currentState = BINI_SONG_EASY;
 }
 
