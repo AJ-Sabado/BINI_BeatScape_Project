@@ -40,3 +40,4 @@ int BINI::Events::getCurrentState()
 {
 	return currentState;
 }
+

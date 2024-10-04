@@ -36,6 +36,7 @@ namespace BINI
 		//Changes application state
 		void setState(int state);
 
+
 	private:
 
 		//SDL event

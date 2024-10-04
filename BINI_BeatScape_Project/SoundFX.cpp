@@ -2,6 +2,7 @@
 
 BINI::SoundFX::SoundFX(std::string path)
 {
+	Mix_Volume(-1, MIX_MAX_VOLUME);
 	bSFX = Mix_LoadWAV(path.c_str());
 	if (bSFX == NULL)
 	{

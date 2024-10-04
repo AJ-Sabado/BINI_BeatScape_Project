@@ -3,18 +3,29 @@
 
 namespace BINI {
 
-    MainMenu::MainMenu(Renderer* renderer) : menuFont(std::make_unique<Font>("assets/fonts/Steelar-j9Vnj.ttf", 28)) {
+    MainMenu::MainMenu(Renderer* renderer){
         done = false;
-        SDL_Color textColor = { 0, 0, 0, 255 };
-        startLabel = std::make_unique<Labels>(renderer, menuFont.get(), "START", textColor);
-        leaderboardsLabel = std::make_unique<Labels>(renderer, menuFont.get(), "LEADERBOARDS", textColor);
-        exitLabel = std::make_unique<Labels>(renderer, menuFont.get(), "EXIT", textColor);
 
+        //INITIALIZING SFX
+        menuSlideSFX = new SoundFX("assets/sfx/menuSlideSFX.wav");
+
+        //Initializing BG Music
+        bgMusic = new Music("assets/music/Menu/Salamin_Rock.mp3");
+
+        //LABELS AND FONT DECLARATIONS
+        menuFont = new Font("assets/fonts/Steelar-j9Vnj.ttf", 28);
+        textColorWhite = { 255, 255, 255 , 255 };
+        startLabel = new Labels(renderer, menuFont, "START", textColorWhite);
+        leaderboardsLabel = new Labels(renderer, menuFont, "LEADERBOARDS", textColorWhite);
+        exitLabel = new Labels(renderer, menuFont, "EXIT", textColorWhite);
+
+        //INITIALIZING BG-SLIDESHOW TEXTURES
         initializeBackgrounds(renderer);
 
-        bgShade = std::make_unique<Texture>(renderer, "assets/Cover_Images/SHADE.png");
-        baseTexture = std::make_unique<Texture>(renderer, "assets/textures/HOME_PAGE_ASSET/HOME_BASE2.png");
-        biniBeatscapeLogo = std::make_unique<Texture>(renderer, "assets/Logo/Bini_BeatScape_Logo_Resized.png");
+        //INITIALIZING MAIN TEXTURES FOR UI
+        bgShade = std::make_unique<Texture>(renderer, "assets/Cover_Images/SHADE.png"); //GRADIENT SHADE
+        baseTexture = std::make_unique<Texture>(renderer, "assets/textures/HOME_PAGE_ASSET/HOME_BASE2.png"); //STAGE
+        biniBeatscapeLogo = std::make_unique<Texture>(renderer, "assets/Logo/Bini_BeatScape_Logo_Resized.png"); //LOGO
     }
 
     void MainMenu::initializeBackgrounds(Renderer* renderer) {
@@ -35,6 +46,10 @@ namespace BINI {
     }
 
     void MainMenu::display(Renderer* renderer) {
+
+        //Playing bg Music
+        bgMusic->startMusic(9999);
+
         Uint32 now = SDL_GetTicks();
         if (now - lastSwitchTime > SLIDE_DURATION) {
             switchToNextSlide();
@@ -47,6 +62,24 @@ namespace BINI {
 
         SDL_Rect logoRect = { 0, 0, 1125, 750 };
         biniBeatscapeLogo->render(renderer, 80, -78, &logoRect);
+
+        switch (state) {
+        case 1:
+            startLabel->setColor(255, 255, 255);
+            leaderboardsLabel->setColor(0, 0, 0);
+            exitLabel->setColor(0, 0, 0);
+            break;
+        case 2:
+            startLabel->setColor(0, 0, 0);
+            leaderboardsLabel->setColor(255, 255, 255);
+            exitLabel->setColor(0, 0, 0);
+            break;
+        case 3:
+            startLabel->setColor(0, 0, 0);
+            leaderboardsLabel->setColor(0, 0, 0);
+            exitLabel->setColor(255, 255, 255);
+            break;
+        }
 
         startLabel->render(renderer, 584, 460);
         leaderboardsLabel->render(renderer, 513, 500);
@@ -62,10 +95,11 @@ namespace BINI {
     {
         return done;
     }
-    
+
     //Handle events here
     bool MainMenu::handleEvents(BINI::Events* events)
     {
+
         while (events->pollEvents() != 0)
         {
             //User exits
@@ -80,7 +114,24 @@ namespace BINI {
                 switch (events->getKey())
                 {
                 case SDLK_DOWN:
-                    std::cout << "Down key pressed down.\n";
+                    state++;
+                    if (state > 3) // Adjust based on number of menu items
+                    {
+                        state = 1; // Loop back to the first menu option
+                    }
+                    std::cout << "Down key pressed. Current choice: " << state << "\n";
+                    menuSlideSFX->playSFX();
+                    break;
+                case SDLK_UP:
+                    state--;
+                    if (state < 1) // Loop back to the last menu option
+                    {
+                        state = 3; // Adjust based on number of menu items
+                    }
+                    std::cout << "Up key pressed. Current choice: " << state << "\n";
+                    menuSlideSFX->playSFX();
+                    break;
+                case SDLK_RETURN:
                     break;
                 }
             }
