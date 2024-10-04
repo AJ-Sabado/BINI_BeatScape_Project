@@ -18,6 +18,8 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="Note.cpp" />
+    <ClCompile Include="SongBar.cpp" />
+    <ClCompile Include="ChartReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -37,6 +39,8 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="Note.h" />
+    <ClInclude Include="SongBar.h" />
+    <ClInclude Include="ChartReader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

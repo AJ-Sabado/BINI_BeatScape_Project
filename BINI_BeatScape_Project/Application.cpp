@@ -31,6 +31,10 @@ BINI::Application::Application()
 
 	if (success)
 	{
+		if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
+		{
+			std::cout << "Warning: Linear texture filtering not enabled!\n";
+		}
 		std::cout << "SDL, SDL image, SDL ttf, and SDL mixer initialized.\n";
 	}
 

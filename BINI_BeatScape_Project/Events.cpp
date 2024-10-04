@@ -2,7 +2,7 @@
 
 BINI::Events::Events()
 {
-	currentState = BINI_START;
+	currentState = BINI_SONG_EASY;
 }
 
 BINI::Events::~Events()
