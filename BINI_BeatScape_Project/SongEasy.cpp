@@ -42,7 +42,7 @@ namespace BINI
 		sceneAlpha = 0;
 		beat = 1;
 		noteY = -noteTexture->getHeight();
-		noteVelocity = renderer->getMaxHeight() / 208;
+		noteYVelocity = renderer->getMaxHeight() / 208;
 		
 
 	}
@@ -110,6 +110,11 @@ namespace BINI
 			}
 		}
 
+		//Fade out
+		if (!fadingIn && false)
+		{
+
+		}
 		
 		//Metronome
 		if (timer->getTicks() % 625 <= 16 && timer->isStarted() && timer->getTicks() > 625)

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "queue"
 #include "Scene.h"
 #include "Renderer.h"
 #include "Timer.h"
@@ -32,7 +33,7 @@ namespace BINI
 	private:
 
 		//Parameters
-		float noteVelocity;
+		float noteYVelocity;
 
 		//Textures
 		BINI::Texture* background;
@@ -61,7 +62,7 @@ namespace BINI
 		BINI::Labels* bini;
 
 
-		//Class Variables
+		//Other Class Variables
 
 		bool done;
 		
