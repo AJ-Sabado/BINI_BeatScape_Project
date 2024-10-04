@@ -17,6 +17,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Note.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="Note.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
