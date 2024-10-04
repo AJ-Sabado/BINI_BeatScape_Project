@@ -3,6 +3,7 @@
 BINI::Events::Events()
 {
 	currentState = BINI_START;
+	currentState = BINI_LOGO;
 }
 
 BINI::Events::~Events()

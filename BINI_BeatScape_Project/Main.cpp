@@ -13,6 +13,7 @@
 #include "MainMenu.h"
 #include "States.h"
 #include "Music.h"
+#include "CompanyLogo.h"
 
 //Parameters for fine tuning.
 const int SCREEN_WIDTH = 1280;
@@ -32,13 +33,13 @@ BINI::Events events;
 
 //Scenes	*all of which extends the BINI::Scene class
 BINI::MainMenu mainMenu(&renderer);
+BINI::CompanyLogo companyLogo(&renderer);
 
 //Current Scene Pointer
 BINI::Scene* currentScene = &mainMenu;
 
 int main(int argc, char* args[])
 {
-
 	while (currentScene->handleEvents(&events))
 	{
 		//Clears screen
@@ -50,9 +51,9 @@ int main(int argc, char* args[])
 			switch (events.getCurrentState())
 			{
 			case BINI_LOGO:
-				if (currentScene != &mainMenu)
+				if (currentScene != &companyLogo)
 				{
-					currentScene = &mainMenu;
+					currentScene = &companyLogo;
 				}
 				break;
 			case BINI_START:
