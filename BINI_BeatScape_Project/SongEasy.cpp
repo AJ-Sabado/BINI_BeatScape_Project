@@ -11,6 +11,7 @@ namespace BINI
 		accuracyPanel = new BINI::Texture(renderer, "assets/textures/GAMEPLAY_ASSETS/ACCURACY_HEADER.png");
 		noteTexture = new BINI::Texture(renderer, "assets/textures/GAMEPLAY_ASSETS/SINGLE_NOTE.png");
 
+		//Texture blend modes
 		background->setBlendMode(SDL_BLENDMODE_BLEND);
 		overlay->setBlendMode(SDL_BLENDMODE_BLEND);
 		titlePanel->setBlendMode(SDL_BLENDMODE_BLEND);
@@ -22,10 +23,10 @@ namespace BINI
 		bebas = new BINI::Font("assets/fonts/BebasNeue-Regular.ttf", 35);
 		SDL_Color black = { 0, 0 ,0 };
 		SDL_Color white = { 255, 255, 255 };
-		hello1 = new BINI::Labels(renderer, steelar, "ISLANG PANTROPIKO", white);
-		hello2 = new BINI::Labels(renderer, bebas, "BINI", black);
-		hello1->setBlendMode(SDL_BLENDMODE_BLEND);
-		hello2->setBlendMode(SDL_BLENDMODE_BLEND);
+		title = new BINI::Labels(renderer, steelar, "ISLANG PANTROPIKO", white);
+		bini = new BINI::Labels(renderer, bebas, "BINI", black);
+		title->setBlendMode(SDL_BLENDMODE_BLEND);
+		bini->setBlendMode(SDL_BLENDMODE_BLEND);
 
 		//Audio
 		song = new BINI::Music("assets/music/easy1.ogg");
@@ -130,20 +131,20 @@ namespace BINI
 		titlePanel->setAlpha(sceneAlpha);
 		accuracyPanel->setAlpha(sceneAlpha);
 		noteTexture->setAlpha(sceneAlpha);
-		hello1->setAlpha(sceneAlpha);
-		hello2->setAlpha(sceneAlpha);
+		title->setAlpha(sceneAlpha);
+		bini->setAlpha(sceneAlpha);
 
 		//Render textures
 		background->render(renderer, 0, 0);
 		overlay->render(renderer, 0, 0);
 		titlePanel->render(renderer, 0, 0);
 		accuracyPanel->render(renderer, renderer->getMaxWidth() - accuracyPanel->getWidth(), renderer->getMaxHeight() - accuracyPanel->getHeight());
-		hello1->render(renderer, renderer->getMaxWidth() / 128, renderer->getMaxHeight() / 64);
-		hello2->render(renderer, renderer->getMaxWidth() / 128, titlePanel->getHeight() - (hello2->getHeight() * 5 / 2));
+		title->render(renderer, renderer->getMaxWidth() / 128, renderer->getMaxHeight() / 64);
+		bini->render(renderer, renderer->getMaxWidth() / 128, titlePanel->getHeight() - (bini->getHeight() * 5 / 2));
 		
 		if (beat >= 6 && noteY <= renderer->getMaxHeight() + noteTexture->getHeight()) 
 		{
-			noteTexture->render(renderer, (renderer->getMaxWidth() / 2) - noteTexture->getWidth(), noteY += noteVelocity);
+			noteTexture->render(renderer, (renderer->getMaxWidth() / 2) - noteTexture->getWidth(), noteY += (int)noteVelocity);
 		}
 					
 

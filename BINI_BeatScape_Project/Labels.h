@@ -18,6 +18,9 @@ namespace BINI
 
 		//Labels deconstructor.
 		~Labels();
+
+		//Sets/Changes the text inside label.
+		void setText(BINI::Renderer* renderer, BINI::Font* font, std::string textureText, SDL_Color textColor);
 		
 		//Set color modulation
 		void setColor(Uint8 red, Uint8 green, Uint8 blue);

@@ -32,7 +32,7 @@ namespace BINI
 	private:
 
 		//Parameters
-		int noteVelocity;
+		float noteVelocity;
 
 		//Textures
 		BINI::Texture* background;
@@ -57,8 +57,8 @@ namespace BINI
 		BINI::Font* bebas;
 
 		//Labels
-		BINI::Labels* hello1;
-		BINI::Labels* hello2;
+		BINI::Labels* title;
+		BINI::Labels* bini;
 
 
 		//Class Variables
@@ -71,10 +71,7 @@ namespace BINI
 
 		int beat;
 
-		int noteY;
-
-		int frames = 1;
-
+		int noteY;		//Temp
 	};
 }
 
