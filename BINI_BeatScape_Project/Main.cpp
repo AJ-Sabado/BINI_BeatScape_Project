@@ -19,6 +19,7 @@
 #include "Music.h"
 #include "CompanyLogo.h"
 #include "SongSelect.h"
+#include "Leaderboards.h"
 
 //Parameters for fine tuning.
 const int SCREEN_WIDTH = 1280;
@@ -40,11 +41,11 @@ BINI::Events events;
 BINI::MainMenu mainMenu(&renderer);
 BINI::CompanyLogo companyLogo(&renderer);
 BINI::SongEasy song(&renderer);
-
 BINI::SongSelect songSelect(&renderer);
+BINI::Leaderboards leaderboards(&renderer);
 
 //Current Scene Pointer
-BINI::Scene* currentScene = &songSelect;
+BINI::Scene* currentScene = &leaderboards;
 
 int main(int argc, char* args[])
 {

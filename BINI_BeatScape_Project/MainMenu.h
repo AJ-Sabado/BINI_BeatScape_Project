@@ -29,9 +29,6 @@ namespace BINI {
         bool isDone() override;
         bool handleEvents(BINI::Events* events) override;
 
-        //BG Music
-        Music* bgMusic;
-
     private:
         //FUNCTIONS
         void switchToNextSlide();
@@ -56,8 +53,9 @@ namespace BINI {
         std::unique_ptr<Texture> baseTexture;
         std::unique_ptr<Texture> biniBeatscapeLogo;
 
-        //SFX
-        SoundFX* menuSlideSFX;
+        //BG Music
+        Music* bgMusic;
+
 
         //Change to true if your scene is ready to exit/transition
         bool done;

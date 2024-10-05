@@ -23,3 +23,13 @@ void BINI::SoundFX::playSFX()
 {
 	Mix_PlayChannel(-1, bSFX, 0);
 }
+
+void BINI::SoundFX::playSlideSFX() {
+	SoundFX* slide = new SoundFX("assets/sfx/menuSlideSFX.wav");
+	slide->playSFX();
+}
+
+void BINI::SoundFX::playEnterSFX() {
+	SoundFX* enter = new SoundFX("assets/sfx/Enter_Pressed_SFX.wav");
+	enter->playSFX();
+}

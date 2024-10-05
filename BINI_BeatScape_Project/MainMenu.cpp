@@ -6,9 +6,6 @@ namespace BINI {
     MainMenu::MainMenu(Renderer* renderer){
         done = false;
 
-        //INITIALIZING SFX
-        menuSlideSFX = new SoundFX("assets/sfx/menuSlideSFX.wav");
-
         //Initializing BG Music
         bgMusic = new Music("assets/music/Menu/Salamin_Rock.mp3");
 
@@ -120,7 +117,7 @@ namespace BINI {
                         state = 1; // Loop back to the first menu option
                     }
                     std::cout << "Down key pressed. Current choice: " << state << "\n";
-                    menuSlideSFX->playSFX();
+                    SoundFX::playSlideSFX();
                     break;
                 case SDLK_UP:
                     state--;
@@ -129,9 +126,10 @@ namespace BINI {
                         state = 3; // Adjust based on number of menu items
                     }
                     std::cout << "Up key pressed. Current choice: " << state << "\n";
-                    menuSlideSFX->playSFX();
+                    SoundFX::playSlideSFX();
                     break;
                 case SDLK_RETURN:
+                    SoundFX::playEnterSFX();
                     break;
                 }
             }
