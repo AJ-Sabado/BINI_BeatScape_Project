@@ -9,6 +9,8 @@ namespace BINI
 		j = NULL;
 		k = NULL;
 
+		isAlive = true;
+
 		totalY = 0;
 	}
 

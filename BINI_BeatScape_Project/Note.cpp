@@ -11,4 +11,9 @@ namespace BINI
 		isAlive = true;
 		
 	}
+
+	void Note::kill()
+	{
+		isAlive = false;
+	}
 }

@@ -17,6 +17,8 @@ namespace BINI
 		BINI::Note* j;
 		BINI::Note* k;
 
+		bool isAlive;
+
 		float totalY;
 	};
 }

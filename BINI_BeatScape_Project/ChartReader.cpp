@@ -19,27 +19,32 @@ std::queue<BINI::SongBar*> BINI::ChartReader::loadSong(std::string path)
 
 	while (getline(inputFile, line))
 	{
-		BINI::SongBar* newBar = new SongBar;
+		int blankCheck = 0;
+		BINI::SongBar* newBar = new BINI::SongBar;
 
 		data = std::stoi(line);
+		blankCheck += data;
 		if (data == 1)
 		{
 			newBar->d = new BINI::Note(1);
 		}
 		getline(inputFile, line);
 		data = std::stoi(line);
+		blankCheck += data;
 		if (data == 1)
 		{
 			newBar->f = new BINI::Note(1);
 		}
 		getline(inputFile, line);
 		data = std::stoi(line);
+		blankCheck += data;
 		if (data == 1)
 		{
 			newBar->j = new BINI::Note(1);
 		}
 		getline(inputFile, line);
 		data = std::stoi(line);
+		blankCheck += data;
 		if (data == 1)
 		{
 			newBar->k = new BINI::Note(1);
@@ -47,7 +52,14 @@ std::queue<BINI::SongBar*> BINI::ChartReader::loadSong(std::string path)
 		getline(inputFile, line);
 		if (line[0] == '#')
 		{
-			song.push(newBar);
+			if (blankCheck > 0)
+				song.push(newBar);
+			else
+			{
+				delete newBar;
+				newBar = NULL;
+				song.push(newBar);
+			}
 			continue;
 		}
 	}

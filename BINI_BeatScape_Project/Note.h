@@ -12,7 +12,7 @@ enum NOTE_POSITION
 namespace BINI
 {
 	//Structure Note. A queue of notes make up a chart.
-	struct Note 
+	struct Note
 	{
 		//Note constructor
 		Note(int release);
@@ -24,6 +24,8 @@ namespace BINI
 		int releaseDuration;
 
 		bool isAlive;
+
+		void kill();
 
 	};
 }

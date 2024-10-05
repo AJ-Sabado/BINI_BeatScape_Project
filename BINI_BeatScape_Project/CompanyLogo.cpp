@@ -55,6 +55,12 @@ namespace BINI {
 	}
 
 	bool CompanyLogo::handleEvents(BINI::Events* events) {
+
+		if (done)
+		{
+			events->setState(BINI_START);
+		}
+
 		while (events->pollEvents() != 0) {
 			// Handle events
 			if (events->type() == SDL_QUIT)
