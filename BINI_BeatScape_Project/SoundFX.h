@@ -26,6 +26,8 @@ namespace BINI
 
 		Mix_Chunk* bSFX;
 	};
+
+
 }
 
 

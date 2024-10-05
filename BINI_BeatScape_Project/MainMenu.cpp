@@ -45,7 +45,7 @@ namespace BINI {
     void MainMenu::display(Renderer* renderer) {
 
         //Playing bg Music
-        bgMusic->startMusic(9999);
+        bgMusic->startMusic(-1);
 
         Uint32 now = SDL_GetTicks();
         if (now - lastSwitchTime > SLIDE_DURATION) {

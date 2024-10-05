@@ -3,6 +3,8 @@
 #include "SDL_mixer.h"
 #include "string"
 #include "iostream"
+#include <chrono>
+#include <thread>
 
 namespace BINI
 {
@@ -28,12 +30,17 @@ namespace BINI
 		//Resumes music.
 		void resumeMusic();
 
+		// Fades out music over a specified duration (in milliseconds).
+		void fadeOutMusic(int duration);
+
 		//Returns true if music is playing.
 		bool isPlaying();
 
 	private:
 		//Mixer hardware
 		Mix_Music* bMusic;
+
+		
 	};
 }
 
