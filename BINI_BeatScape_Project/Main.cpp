@@ -3,10 +3,12 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <queue>
+#include <sstream>
 
 #include "Application.h"
 #include "Window.h"
@@ -41,11 +43,17 @@ BINI::Events events;
 BINI::MainMenu mainMenu(&renderer);
 BINI::CompanyLogo companyLogo(&renderer);
 BINI::SongEasy song(&renderer);
+
+BINI::MainMenu* mainmenu = nullptr;
+BINI::CompanyLogo* company = nullptr;
+BINI::SongEasy* songeasy = new BINI::SongEasy(&renderer);
+
 BINI::SongSelect songSelect(&renderer);
 BINI::Leaderboards leaderboards(&renderer);
 
 //Current Scene Pointer
-BINI::Scene* currentScene = &leaderboards;
+BINI::Scene* currentScene = &mainMenu;
+//BINI::Scene* currentScene = songeasy;
 
 int main(int argc, char* args[])
 {
@@ -55,24 +63,27 @@ int main(int argc, char* args[])
 		renderer.clearScreen();
 
 		//Scene manager
-		if (currentScene->isDone())
+		if (currentScene->isDone() || currentScene == nullptr)
 		{
+			if (currentScene != nullptr)
+			{
+				delete currentScene;
+				currentScene = nullptr;
+			}
+
 			switch (events.getCurrentState())
 			{
 			case BINI_LOGO:
-				if (currentScene != &companyLogo)
-				{
-					currentScene = &companyLogo;
-				}
+				company = new BINI::CompanyLogo(&renderer);
+				currentScene = company;
 				break;
 			case BINI_START:
-
+				mainmenu = new BINI::MainMenu(&renderer);
+				currentScene = mainmenu;
 				break;
 			case BINI_SONG_EASY:
-				if (currentScene != &song)
-				{
-					currentScene = &song;
-				}
+				songeasy = new BINI::SongEasy(&renderer);
+				currentScene = songeasy;
 				break;
 			}
 		}
