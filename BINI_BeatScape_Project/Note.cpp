@@ -2,14 +2,13 @@
 
 namespace BINI
 {
-	Note::Note()
+	Note::Note(int release)
 	{
-		int noteXPos = 0;
+		noteYPos = 0;
 
-		float noteYPos = 0;
+		releaseDuration = release;
 
-		int downWindow = 0;
-
-		int release = 0;
+		isAlive = true;
+		
 	}
 }

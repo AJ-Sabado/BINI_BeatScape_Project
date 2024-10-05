@@ -3,7 +3,10 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include <iostream>
+#include <fstream>
 #include <string>
+#include <vector>
+#include <queue>
 
 #include "Application.h"
 #include "Window.h"
@@ -11,6 +14,7 @@
 #include "Events.h"
 #include "Scene.h"
 #include "MainMenu.h"
+#include "SongEasy.h"
 #include "States.h"
 #include "Music.h"
 #include "CompanyLogo.h"
@@ -34,6 +38,7 @@ BINI::Events events;
 //Scenes	*all of which extends the BINI::Scene class
 BINI::MainMenu mainMenu(&renderer);
 BINI::CompanyLogo companyLogo(&renderer);
+BINI::SongEasy song(&renderer);
 
 //Current Scene Pointer
 BINI::Scene* currentScene = &mainMenu;
@@ -57,9 +62,12 @@ int main(int argc, char* args[])
 				}
 				break;
 			case BINI_START:
-				if (currentScene != &mainMenu)
+
+				break;
+			case BINI_SONG_EASY:
+				if (currentScene != &song)
 				{
-					currentScene = &mainMenu;
+					currentScene = &song;
 				}
 				break;
 			}

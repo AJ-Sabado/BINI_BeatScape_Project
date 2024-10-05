@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="ChartReader.cpp" />
     <ClCompile Include="CompanyLogo.cpp" />
     <ClCompile Include="Events.cpp" />
     <ClCompile Include="Font.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="Music.cpp" />
     <ClCompile Include="Note.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="SongBar.cpp" />
     <ClCompile Include="SongEasy.cpp" />
     <ClCompile Include="SoundFX.cpp" />
     <ClCompile Include="test.cpp" />
@@ -171,6 +173,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="ChartReader.h" />
     <ClInclude Include="CompanyLogo.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="Font.h" />
@@ -180,6 +183,7 @@
     <ClInclude Include="Note.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SongBar.h" />
     <ClInclude Include="SongEasy.h" />
     <ClInclude Include="SoundFX.h" />
     <ClInclude Include="States.h" />
