@@ -5,6 +5,9 @@ BINI::Events::Events()
 	//currentState = BINI_START;
 	currentState = BINI_SONG_EASY;
 	//currentState = BINI_LOGO;
+
+	//Init player data
+	clearUserData();
 }
 
 BINI::Events::~Events()
@@ -41,5 +44,31 @@ bool BINI::Events::repeat()
 int BINI::Events::getCurrentState()
 {
 	return currentState;
+}
+
+void BINI::Events::setUserData(int score, int maxcombo)
+{
+	userScore = score;
+	userMaxCombo = maxcombo;
+}
+
+//Returns user score
+int BINI::Events::getUserScore()
+{
+	return userScore;
+}
+
+//Returns user max combo
+int BINI::Events::getUserMaxCombo()
+{
+	return userMaxCombo;
+}
+
+
+//Removes previously stored user data
+void BINI::Events::clearUserData()
+{
+	userMaxCombo = 0;
+	userScore = 0;
 }
 

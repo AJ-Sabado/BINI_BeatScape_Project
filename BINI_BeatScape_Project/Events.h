@@ -4,6 +4,7 @@
 #include "States.h"
 #include "SoundFX.h"
 #include "iostream"
+#include "string"
 
 namespace BINI
 {
@@ -36,6 +37,19 @@ namespace BINI
 		//Changes application state
 		void setState(int state);
 
+		//Stores user data for leaderboard export
+		void setUserData( int score, int maxcombo);
+
+		//Returns user score
+		int getUserScore();
+
+		//Returns user max combo
+		int getUserMaxCombo();
+
+
+		//Removes previously stored user data
+		void clearUserData();
+
 
 	private:
 
@@ -44,6 +58,13 @@ namespace BINI
 
 		//Current application state
 		int currentState;
+
+		//Current User score
+		int userScore;
+
+		//Current User max combo
+		int userMaxCombo;
+
 	};
 }
 

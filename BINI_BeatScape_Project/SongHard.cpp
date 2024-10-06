@@ -303,8 +303,12 @@ namespace BINI
 		}
 
 		//Fade out
-		if (!fadingIn && beat > 872)
+		if (beat > 872 || accuracy < 65.f)
 		{
+			if (accuracy < 65.f && sceneAlpha == 255)
+			{
+				song->fadeOutMusic(1000);
+			}
 			if (sceneAlpha - 2 < 0)
 			{
 				sceneAlpha = 0;
@@ -737,10 +741,14 @@ namespace BINI
 
 	bool SongHard::handleEvents(BINI::Events* events)
 	{
-		if (!fadingIn)
+		if (!fadingIn && !isPaused && sceneAlpha == 0)
 		{
+			//Store user results
+			events->setUserData(score, maxCombo);
+
 			//Sets next scene
 			events->setState(BINI_LOGO);
+			
 		}
 
 		while (events->pollEvents() != 0)
