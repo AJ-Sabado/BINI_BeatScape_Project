@@ -2,11 +2,8 @@
 
 BINI::Events::Events()
 {
-	//currentState = BINI_START;
-	currentState = BINI_SONG_EASY;
-	//currentState = BINI_LOGO;
-
 	//Init player data
+	currentState = BINI_LOGO;
 	clearUserData();
 }
 

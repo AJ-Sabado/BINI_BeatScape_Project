@@ -31,10 +31,13 @@ namespace BINI
 		void resumeMusic();
 
 		// Fades out music over a specified duration (in milliseconds).
-		void fadeOutMusic(int duration);
+		static void fadeOutMusic(int duration);
 
 		//Returns true if music is playing.
 		bool isPlaying();
+
+		/*static void playBGMusic();
+		static void endBGMusic();*/
 
 	private:
 		//Mixer hardware

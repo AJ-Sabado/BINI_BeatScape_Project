@@ -30,12 +30,6 @@ namespace BINI {
 
 		header->render(renderer, 0, 0, nullptr);
 
-		/*pantropiko_easy->render(renderer,0, 0, nullptr);
-		salamin_mid->render(renderer, 0, 0, nullptr);
-		cherry_hard->render(renderer, 0, 0, nullptr);*/
-
-		
-
 		switch (state) {
 		case 1: 
 			pantropiko_easy->render(renderer, 0,0, nullptr);
@@ -99,6 +93,24 @@ namespace BINI {
 					break;
 				case SDLK_RETURN:
 					SoundFX::playEnterSFX();
+					switch (state) {
+					case 1:
+						events->setState(BINI_SONG_EASY);
+						break;
+					case 2:
+						events->setState(BINI_SONG_MEDIUM);
+						break;
+					case 3:
+						events->setState(BINI_SONG_HARD);
+						break;
+					}
+					Music::fadeOutMusic(1000);
+					done = true;
+					break;
+				case SDLK_ESCAPE:
+					SoundFX::playEnterSFX();
+					events->setState(BINI_START);
+					done = true;
 					break;
 				}
 			}

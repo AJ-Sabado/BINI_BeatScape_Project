@@ -15,7 +15,7 @@ namespace BINI {
 	class Leaderboards : public Scene {
 	public:
 		explicit Leaderboards(BINI::Renderer* renderer);
-		~Leaderboards() override = default;
+		~Leaderboards() override ;
 
 		void display(BINI::Renderer* renderer) override;
 		bool isDone() override;

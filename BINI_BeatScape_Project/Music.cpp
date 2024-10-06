@@ -62,3 +62,12 @@ void BINI::Music::fadeOutMusic(int duration)
 	// Fade out music over the specified duration
 	Mix_FadeOutMusic(duration);
 }
+
+//void BINI::Music::playBGMusic() {
+//	BINI::Music* music = new Music("assets/music/Menu/Salamin_Rock.mp3");
+//	music->playBGMusic;
+//}
+//
+//void BINI::Music::endBGMusic() {
+//
+//}

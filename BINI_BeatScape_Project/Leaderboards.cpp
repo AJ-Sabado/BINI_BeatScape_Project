@@ -20,6 +20,19 @@ namespace BINI {
 
 	}
 
+	Leaderboards::~Leaderboards() {
+		delete shade;
+		delete LB_Header;
+		delete Top_1;
+		delete Top_2;
+		delete Top_3;
+		delete LB_Main;
+
+		for (auto background : backgrounds) {
+			delete background;
+		}
+	}
+
 	void Leaderboards::display(Renderer* renderer) {
 		Uint32 now = SDL_GetTicks();
 		if (now - lastSwitchTime > SLIDE_DURATION) {
@@ -43,7 +56,7 @@ namespace BINI {
 		return done;
 	}
 
-	bool Leaderboards::handleEvents(Events* events){
+	bool Leaderboards::handleEvents(Events* events) {
 		while (events->pollEvents() != 0)
 		{
 			//User exits
@@ -52,31 +65,42 @@ namespace BINI {
 				return false;
 			}
 
-			
+			if (events->type() == SDL_KEYDOWN && !events->repeat())
+			{
+				switch (events->getKey())
+				{
+				case SDLK_ESCAPE:
+					SoundFX::playEnterSFX();
+					events->setState(BINI_START);
+					done = true;
+					break;
+				}
+
+			}
+	
 		}
 		return true;
 	}
 
-	void Leaderboards::initializeBackgrounds(Renderer* renderer) {
-		const std::vector<std::string> paths = {
-			"assets/Cover_Images/BINI_COVER_1.png",
-			"assets/Cover_Images/BINI_COVER_2.png",
-			"assets/Cover_Images/BINI_COVER_3.png",
-			"assets/Cover_Images/BINI_COVER_4.png",
-			"assets/Cover_Images/BINI_COVER_5.png",
-			"assets/Cover_Images/BINI_COVER_6.png",
-			"assets/Cover_Images/BINI_COVER_7.png",
-			"assets/Cover_Images/BINI_COVER_8.png"
-		};
+		void Leaderboards::initializeBackgrounds(Renderer * renderer) {
+			const std::vector<std::string> paths = {
+				"assets/Cover_Images/BINI_COVER_1.png",
+				"assets/Cover_Images/BINI_COVER_2.png",
+				"assets/Cover_Images/BINI_COVER_3.png",
+				"assets/Cover_Images/BINI_COVER_4.png",
+				"assets/Cover_Images/BINI_COVER_5.png",
+				"assets/Cover_Images/BINI_COVER_6.png",
+				"assets/Cover_Images/BINI_COVER_7.png",
+				"assets/Cover_Images/BINI_COVER_8.png"
+			};
 
-		for (const auto& path : paths) {
-			backgrounds.push_back(new Background(renderer, path));
+			for (const auto& path : paths) {
+				backgrounds.push_back(new Background(renderer, path));
+			}
+		}
+
+		void Leaderboards::switchToNextSlide() {
+			currentIndex = (currentIndex + 1) % backgrounds.size();
 		}
 	}
-
-	void Leaderboards::switchToNextSlide() {
-		currentIndex = (currentIndex + 1) % backgrounds.size();
-	}
-
-
-}
+	

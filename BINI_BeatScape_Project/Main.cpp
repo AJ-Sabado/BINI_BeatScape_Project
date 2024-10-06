@@ -43,23 +43,19 @@ BINI::Renderer renderer(&window);
 BINI::Events events;
 
 //Scenes	*all of which extends the BINI::Scene class
-//BINI::MainMenu mainMenu(&renderer);
-//BINI::CompanyLogo companyLogo(&renderer);
-//BINI::SongEasy song(&renderer);
-
+BINI::CompanyLogo* company = new BINI::CompanyLogo(&renderer);
 BINI::MainMenu* mainmenu = nullptr;
-BINI::CompanyLogo* company = nullptr;
+BINI::SongSelect* songSelect = nullptr;
+BINI::Leaderboards* leaderboards = nullptr;
 BINI::SongEasy* songeasy = nullptr;
-//
-//BINI::SongSelect songSelect(&renderer);
-//BINI::Leaderboards leaderboards(&renderer);
-
 BINI::SongMedium* songmedium = nullptr;
-BINI::SongHard* songhard = new BINI::SongHard(&renderer);
+BINI::SongHard* songhard = nullptr;
 
 //Current Scene Pointer
-BINI::Scene* currentScene = songhard;
-//BINI::Scene* currentScene = songeasy;
+BINI::Scene* currentScene = company;
+
+
+bool exitRequested = false; // Flag to track exit state
 
 int main(int argc, char* args[])
 {
@@ -87,19 +83,47 @@ int main(int argc, char* args[])
 				mainmenu = new BINI::MainMenu(&renderer);
 				currentScene = mainmenu;
 				break;
+			case BINI_SONG_SELECT:
+				songSelect = new BINI::SongSelect(&renderer);
+				currentScene = songSelect;
+				break;
+			case BINI_LEADERBOARD:
+				leaderboards = new BINI::Leaderboards(&renderer);
+				currentScene = leaderboards;
+				break;
 			case BINI_SONG_EASY:
 				songeasy = new BINI::SongEasy(&renderer);
 				currentScene = songeasy;
 				break;
+			case BINI_SONG_MEDIUM:
+				songmedium = new BINI::SongMedium(&renderer);
+				currentScene = songmedium;
+				break;
+			case BINI_SONG_HARD:
+				songhard = new BINI::SongHard(&renderer);
+				currentScene = songhard;
+				break;
+			case BINI_EXIT:
+				BINI::Music::fadeOutMusic(1000);
+				renderer.fadingOut(1000);
+				exitRequested = true; // Mark exit as requested
+				break;
 			}
 		}
 
+		// Check for exit request and break out of the loop after fading out
+		if (exitRequested)
+		{
+			break; // Exit the loop to allow the application to clean up
+		}
+
 		//Draw current screen
-		currentScene->display(&renderer);
+		if (currentScene) {
+			currentScene->display(&renderer);
+		}
 
 		//Update screen
 		renderer.updateScreen();
-
 	}
 
 	return 0;

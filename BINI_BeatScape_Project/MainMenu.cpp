@@ -130,6 +130,17 @@ namespace BINI {
                     break;
                 case SDLK_RETURN:
                     SoundFX::playEnterSFX();
+                    switch (state) {
+                    case 1:
+                        events->setState(BINI_SONG_SELECT);
+                        break;
+                    case 2:
+                        events->setState(BINI_LEADERBOARD);
+                        break;
+                    case 3:
+                        events->setState(BINI_EXIT);
+                    }
+                    done = true;
                     break;
                 }
             }

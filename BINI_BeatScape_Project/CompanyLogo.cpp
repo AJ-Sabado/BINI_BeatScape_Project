@@ -5,12 +5,13 @@
 namespace BINI {
 
 	CompanyLogo::CompanyLogo(Renderer* renderer) {
+		done = false;
 
 		steelar = new Font("assets/fonts/Steelar-j9Vnj.ttf", 28);
 		bebas = new Font("assets/fonts/BebasNeue-Regular.ttf", 30);
 		SDL_Color white = { 255,255,255,255 };
-		pressStart = new Labels(renderer, steelar, "<PRESS ENTER TO START>", white);
-		instruction = new Labels(renderer, bebas, "[!] READ: This game uses keyboard only. Enjoy!", white);
+		pressStart = new Labels(renderer, steelar, "PRESS <ENTER> TO START", white);
+		instruction = new Labels(renderer, bebas, "[ ! ] READ: This game uses key controls only. Enjoy!", white);
 		
 		background = new Texture(renderer, "assets/Logo/Black_BG.png");
 		logo = new Texture(renderer, "assets/Logo/Company_Logo_Asset.png");
@@ -22,10 +23,13 @@ namespace BINI {
 	CompanyLogo::~CompanyLogo() {
 		delete background;
 		delete logo;
+		delete instruction;
+		delete steelar;
+		delete bebas;
+		delete pressStart;
 	}
 
 	void CompanyLogo::display(Renderer* renderer) {
-
 		background->render(renderer, 0, 0);
 		switch (enter) {
 		case 0:
@@ -35,7 +39,7 @@ namespace BINI {
 			pressStart->setAlpha(opacity);
 			pressStart->render(renderer, 420, 600);
 			instruction->setAlpha(opacity);
-			instruction->render(renderer, 470, 626);
+			instruction->render(renderer, 455, 626);
 			break;
 		case 1:
 			fade_out();
@@ -44,7 +48,7 @@ namespace BINI {
 			pressStart->setAlpha(opacity);
 			pressStart->render(renderer, 420, 600);
 			instruction->setAlpha(opacity);
-			instruction->render(renderer, 470, 626);
+			instruction->render(renderer, 455, 626);
 			break;
 		}
 	}
@@ -95,7 +99,6 @@ namespace BINI {
 		}
 		else {
 			opacity = 255;
-			done = true;
 		}
 	}
 
@@ -111,6 +114,7 @@ namespace BINI {
 		}
 		else {
 			opacity = 0;
+			SDL_Delay(1000);
 			done = true;
 		}
 	}

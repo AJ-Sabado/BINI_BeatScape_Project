@@ -9,6 +9,7 @@
 #include "Renderer.h"
 #include "Texture.h"
 #include <vector>
+#include "Music.h"
 
 namespace BINI {
 
