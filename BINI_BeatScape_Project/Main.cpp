@@ -9,6 +9,7 @@
 #include <vector>
 #include <queue>
 #include <sstream>
+#include <math.h>
 
 #include "Application.h"
 #include "Window.h"

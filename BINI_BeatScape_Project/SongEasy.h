@@ -16,6 +16,7 @@
 #include "queue"
 #include "sstream"
 #include "iomanip"
+#include "math.h"
 
 namespace BINI
 {
@@ -40,14 +41,17 @@ namespace BINI
 	private:
 
 		//Parameters
-		float noteYVelocity;
-		int score = 0;
 		const int maxNotes = 235;
 		const int maxScore = 500000;
-		int perfectNotes = maxNotes;
+		const int bpm = 96;
+		const std::string backgroundPath = "assets/Cover_Images/BINI_COVER_6.png";
+		const std::string musicPath = "assets/music/easy1.ogg";
+		const std::string chartPath = "charts/easy.bchart";
 
 		//Scores
 		float accuracy = 100.f;
+		int perfectNotes = maxNotes;
+		int score = 0;
 		int dScoreQ = 0;
 		int fScoreQ = 0;
 		int jScoreQ = 0;
@@ -66,6 +70,10 @@ namespace BINI
 		int NOTE_POS2;
 		int NOTE_POS3;
 		int NOTE_POS4;
+
+		//Note Motion
+		float noteYVelocity;
+		float noteScrollTime;
 
 		//Key event flags
 		bool holdingD;
@@ -92,7 +100,7 @@ namespace BINI
 		//Timers
 		BINI::Timer* timer;
 		BINI::Timer* stepTimer;
-		BINI::Timer* beatDurationTimer;
+		BINI::Timer* songDurationTimer;
 
 		//Chart reader
 		BINI::ChartReader* chartReader;
@@ -118,11 +126,13 @@ namespace BINI
 		BINI::Labels* comboHeader;
 		BINI::Labels* comboCounter;
 		BINI::Labels* noteHit;
+		BINI::Labels* DButton;
+		BINI::Labels* JButton;
+		BINI::Labels* FButton;
+		BINI::Labels* KButton;
 
 		//Text stream
 		std::stringstream stringStream;
-
-			//Other Class Variables
 
 		//flags
 		bool done;
@@ -130,10 +140,10 @@ namespace BINI
 		bool isPaused;
 		int noteHitValue;
 
-		//scene opacity modifier
+		//Object Alphas
+			//scene opacity modifier
 		Uint8 sceneAlpha;
-
-		//note bar highlights modifier
+			//note bar highlights modifier
 		Uint8 bar1Highlight;
 		Uint8 bar2Highlight;
 		Uint8 bar3Highlight;
@@ -148,8 +158,9 @@ namespace BINI
 		float bps;
 
 		//Beat detection
-		Uint8 beatDuration;
-		Uint8 humanDuration;
+		int beatDuration;
+		int lastBeatDuration;
+		int notePassedBarrier;
 
 		//Private Methods
 		Uint8 barHighlightsfadeOut(Uint8 highlight);

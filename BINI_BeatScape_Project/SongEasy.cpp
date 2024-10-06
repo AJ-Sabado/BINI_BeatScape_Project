@@ -12,7 +12,7 @@ namespace BINI
 	SongEasy::SongEasy(BINI::Renderer* renderer)
 	{
 		//Textures
-		background = new BINI::Texture(renderer, "assets/Cover_Images/BINI_COVER_6.png");
+		background = new BINI::Texture(renderer, backgroundPath);
 		overlay = new BINI::Texture(renderer, "assets/Cover_Images/SHADE.png");
 		titlePanel = new BINI::Texture(renderer, "assets/textures/GAMEPLAY_ASSETS/SONG_TITLE_HEADER.png");
 		accuracyPanel = new BINI::Texture(renderer, "assets/textures/GAMEPLAY_ASSETS/ACCURACY_HEADER.png");
@@ -23,7 +23,7 @@ namespace BINI
 
 		//Chart
 		chartReader = new BINI::ChartReader();
-		chart = chartReader->loadSong("charts/easy.bchart");
+		chart = chartReader->loadSong(chartPath);
 
 		//Rects
 		basebarSize = { 0, 0, barHighlights->getWidth(), renderer->getMaxHeight()};
@@ -53,7 +53,11 @@ namespace BINI
 		scoreLabel = new BINI::Labels(renderer, steelar, "0", white);
 		comboHeader = new BINI::Labels(renderer, bebas, "Combo", white);
 		comboCounter = new BINI::Labels(renderer, bebasBig, "0", white);
-		noteHit = new BINI::Labels(renderer, steelarBig, "perfect", white);
+		noteHit = new BINI::Labels(renderer, steelarBig, "ready", white);
+		DButton = new BINI::Labels(renderer, bebasBig, "D", white);
+		FButton = new BINI::Labels(renderer, bebasBig, "F", white);
+		JButton = new BINI::Labels(renderer, bebasBig, "J", white);
+		KButton = new BINI::Labels(renderer, bebasBig, "K", white);
 
 		title->setBlendMode(SDL_BLENDMODE_BLEND);
 		bini->setBlendMode(SDL_BLENDMODE_BLEND);
@@ -62,9 +66,15 @@ namespace BINI
 		comboHeader->setBlendMode(SDL_BLENDMODE_BLEND);
 		comboCounter->setBlendMode(SDL_BLENDMODE_BLEND);
 		noteHit->setBlendMode(SDL_BLENDMODE_BLEND);
+		DButton->setBlendMode(SDL_BLENDMODE_BLEND);
+		FButton->setBlendMode(SDL_BLENDMODE_BLEND);
+		JButton->setBlendMode(SDL_BLENDMODE_BLEND);
+		KButton->setBlendMode(SDL_BLENDMODE_BLEND);
+
+
 
 		//Audio
-		song = new BINI::Music("assets/music/easy1.ogg");
+		song = new BINI::Music(musicPath);
 		sfx = new BINI::SoundFX("assets/sfx/metronome.wav");
 		
 		//Timer
@@ -72,8 +82,8 @@ namespace BINI
 		timer->stop();
 		stepTimer = new BINI::Timer;
 		stepTimer->stop();
-		beatDurationTimer = new BINI::Timer;
-		beatDurationTimer->stop();
+		songDurationTimer = new BINI::Timer;
+		songDurationTimer->stop();
 
 		//Flags
 		done = false;
@@ -100,15 +110,21 @@ namespace BINI
 		holdingJ = false;
 		holdingK = false;
 
+		//Metronome Calcs
 		beat = 0;
 		oldBeat = 0;
 		currentBeat = 0;
-		bps = 1.6;
+		bps = (float)bpm / 60;
+
+		//Note Hit
 		noteHitValue = NO_INPUT;
 		beatDuration = 0;
+		lastBeatDuration = 0;
+		notePassedBarrier = (renderer->getMaxHeight() - accuracyPanel->getHeight() - fret->getHeight()) / 2 + noteTexture->getHeight();
 
-		noteYVelocity = (renderer->getMaxHeight() - accuracyPanel->getHeight() - fret->getHeight()) / 1.25;
-
+		//Note velocity
+		noteScrollTime = 120.f / bpm;
+		noteYVelocity = (renderer->getMaxHeight() - accuracyPanel->getHeight() - fret->getHeight()) / noteScrollTime;
 		bar = currentBars.begin();
 		
 	}
@@ -241,16 +257,28 @@ namespace BINI
 		//Beat pulse
 		if (timer->isStarted() && !isPaused)
 		{
-			currentBeat = (int)(timer->getTicks() * bps / 1000.f);
+			float beatGlide = timer->getTicks() * bps / 1000.f;
+			currentBeat = (int)(beatGlide);
 		}
 		
+		//Max Combo Counter
+		if (currentCombo > maxCombo)
+		{
+			maxCombo = currentCombo;
+		}
+
+
 		//Metronome
 		if (currentBeat > oldBeat && timer->isStarted())
 		{
 			oldBeat = currentBeat;
 			beat++;
-			beatDuration = beatDurationTimer->getTicks();
-			beatDurationTimer->start();
+			beatDuration = songDurationTimer->getTicks();
+			if (!currentBars.empty() && currentBars.front() != NULL)	//debug
+			{
+				std::cout << currentBars.front()->totalY << "\n";
+			}
+			songDurationTimer->start();
 			if (beat <= 4)
 				sfx->playSFX();
 			if (!chart.empty() && beat >= 3)
@@ -269,7 +297,6 @@ namespace BINI
 				sceneAlpha = 255;
 				fadingIn = false;
 				timer->start();
-				beatDurationTimer->start();
 			}
 			else
 			{
@@ -295,9 +322,10 @@ namespace BINI
 		
 
 		//Song controls
-		if (beat == 5 && song->isPlaying())
+		if (beat == 5 && !song->isPlaying())
 		{
 			song->startMusic(0);
+			songDurationTimer->start();
 		}
 
 		//Set Texture Alphas
@@ -394,10 +422,17 @@ namespace BINI
 					//D
 				if (currentBars.front() != NULL && currentBars.front()->d != NULL && dScoreQ != 0)
 				{
+
+					noteHitAlpha = 255;
+					if (currentBars.front()->d->noteYPos < notePassedBarrier)
+					{
+						dScoreQ = MISS;
+
+					}
+					noteHitValue = dScoreQ;
 					delete currentBars.front()->d;
 					currentBars.front()->d = NULL;
-					noteHitAlpha = 255;
-					noteHitValue = dScoreQ;
+					
 					switch (dScoreQ)
 					{
 					case PERFECT:
@@ -431,10 +466,15 @@ namespace BINI
 					//F
 				if (currentBars.front() != NULL && currentBars.front()->f != NULL && fScoreQ != 0)
 				{
+					noteHitAlpha = 255;
+					
+					if (currentBars.front()->f->noteYPos < notePassedBarrier)
+					{
+						fScoreQ = MISS;
+					}
+					noteHitValue = fScoreQ;
 					delete currentBars.front()->f;
 					currentBars.front()->f = NULL;
-					noteHitAlpha = 255;
-					noteHitValue = fScoreQ;
 					switch (fScoreQ)
 					{
 					case PERFECT:
@@ -467,10 +507,15 @@ namespace BINI
 					//J
 				if (currentBars.front() != NULL && currentBars.front()->j != NULL && jScoreQ != 0)
 				{
+					noteHitAlpha = 255;
+					
+					if (currentBars.front()->j->noteYPos < notePassedBarrier)
+					{
+						jScoreQ = MISS;
+					}
+					noteHitValue = jScoreQ;
 					delete currentBars.front()->j;
 					currentBars.front()->j = NULL;
-					noteHitAlpha = 255;
-					noteHitValue = jScoreQ;
 					switch (jScoreQ)
 					{
 					case PERFECT:
@@ -504,10 +549,14 @@ namespace BINI
 					//K
 				if (currentBars.front() != NULL && currentBars.front()->k != NULL && kScoreQ != 0)
 				{
+					noteHitAlpha = 255;
+					if (currentBars.front()->k->noteYPos < notePassedBarrier)
+					{
+						kScoreQ = MISS;
+					}
+					noteHitValue = kScoreQ;
 					delete currentBars.front()->k;
 					currentBars.front()->k = NULL;
-					noteHitAlpha = 255;
-					noteHitValue = kScoreQ;
 					switch (kScoreQ)
 					{
 					case PERFECT:
@@ -610,7 +659,8 @@ namespace BINI
 		}
 
 		comboHeader->setAlpha(infoAlpha);
-		comboHeader->render(renderer, renderer->getMaxWidth() / 2 - comboHeader->getWidth() / 2, titlePanel->getHeight() - comboHeader->getHeight());
+		if (currentCombo != 0)
+			comboHeader->render(renderer, renderer->getMaxWidth() / 2 - comboHeader->getWidth() / 2, titlePanel->getHeight() - comboHeader->getHeight());
 		
 		comboCounter->setAlpha(infoAlpha);
 		if (currentCombo != 0)
@@ -619,50 +669,64 @@ namespace BINI
 		}
 
 		//Note Hit Alpha and logic
-		
-		stringStream.str("");
-		switch (noteHitValue)
+		if (!fadingIn)
 		{
-		case PERFECT:
-			stringStream << "perfect";
-			break;
-		case GOOD:
-			stringStream << "good";
-			break;
-		case MISS:
-			stringStream << "miss";
-		case NO_INPUT:
-			stringStream << " ";
-		}
-
-		if (noteHitAlpha == 255)
-		{
-			noteHit->setText(renderer, steelarBig, stringStream.str().c_str(), white);
-			noteHit->setBlendMode(SDL_BLENDMODE_BLEND);
-		}
-		if (song->isPlaying() && !isPaused)
-		{
-			if (noteHitAlpha - 3 < 0)
+			stringStream.str("");
+			switch (noteHitValue)
 			{
-				noteHitAlpha = 0;
-				noteHitValue = NO_INPUT;
+			case PERFECT:
+				stringStream << "perfect";
+				break;
+			case GOOD:
+				stringStream << "good";
+				break;
+			case MISS:
+				stringStream << "miss";
+			case NO_INPUT:
+				stringStream << " ";
 			}
-			else
+
+			if (noteHitAlpha == 255)
 			{
-				noteHitAlpha -= 3;
+				noteHit->setText(renderer, steelarBig, stringStream.str().c_str(), white);
+				noteHit->setBlendMode(SDL_BLENDMODE_BLEND);
+			}
+			if (song->isPlaying() && !isPaused)
+			{
+				if (noteHitAlpha - 3 < 0)
+				{
+					noteHitAlpha = 0;
+					noteHitValue = NO_INPUT;
+				}
+				else
+				{
+					noteHitAlpha -= 3;
+				}
+
+				noteHit->setAlpha(noteHitAlpha);
+
+				if (noteHitValue != NO_INPUT)
+				{
+					noteHit->render(renderer, renderer->getMaxWidth() / 2 - noteHit->getWidth() / 2, renderer->getMaxHeight() - accuracyPanel->getHeight() - fret->getHeight() * 2);
+				}
 			}
 		}
-
-		
-
-		
-		
-		noteHit->setAlpha(noteHitAlpha);
-
-		if (noteHitValue != NO_INPUT)
+		else
 		{
+			noteHit->setAlpha(sceneAlpha);
 			noteHit->render(renderer, renderer->getMaxWidth() / 2 - noteHit->getWidth() / 2, renderer->getMaxHeight() - accuracyPanel->getHeight() - fret->getHeight() * 2);
 		}
+		
+
+		DButton->setAlpha(sceneAlpha);
+		FButton->setAlpha(sceneAlpha);
+		JButton->setAlpha(sceneAlpha);
+		KButton->setAlpha(sceneAlpha);
+
+		DButton->render(renderer, renderer->getMaxWidth() / 2 - fret->getWidth() * 3 / 8 - DButton->getWidth() / 2, renderer->getMaxHeight() - accuracyPanel->getHeight() / 2 - DButton->getHeight() / 2);
+		FButton->render(renderer, renderer->getMaxWidth() / 2 - fret->getWidth() / 8 - FButton->getWidth() / 2, renderer->getMaxHeight() - accuracyPanel->getHeight() / 2 - FButton->getHeight() / 2);
+		JButton->render(renderer, renderer->getMaxWidth() / 2 + fret->getWidth() / 4 - barHighlights->getWidth() / 2 - JButton->getWidth() / 2, renderer->getMaxHeight() - accuracyPanel->getHeight() / 2 - JButton->getHeight() / 2);
+		KButton->render(renderer, renderer->getMaxWidth() / 2 + fret->getWidth() / 2 - barHighlights->getWidth() / 2 - KButton->getWidth() / 2, renderer->getMaxHeight() - accuracyPanel->getHeight() / 2 - KButton->getHeight() / 2);
 
 		//Ticks
 		oldBeat = currentBeat;
@@ -683,16 +747,28 @@ namespace BINI
 
 	int SongEasy::getAccuracy()
 	{
-		int noteAcc= 0;
-		if (timer->getTicks() % beatDuration <= 117)
+		int noteAcc = 0;
+		int humanDuration = songDurationTimer->getTicks();
+		int diff = 0;
+		if (humanDuration < 267)
+		{
+			diff = humanDuration;
+		}
+		else
+		{
+			diff = (int)fabsf(beatDuration - humanDuration);
+		}
+		
+		std::cout << "Difference: " << diff << "\n";
+		if (diff <= 117)
 		{
 			noteAcc = PERFECT;
 		}
-		else if (timer->getTicks() % beatDuration > 117 && timer->getTicks() % beatDuration <= 167)
+		else if (diff > 177 && diff <= 267)
 		{
 			noteAcc = GOOD;
 		}
-		else
+		else if (diff > 267)
 		{
 			noteAcc = MISS;
 		}
