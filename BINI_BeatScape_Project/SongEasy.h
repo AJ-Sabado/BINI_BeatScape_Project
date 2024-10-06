@@ -1,7 +1,5 @@
 #pragma once
 
-#include <chrono>
-
 #include "Scene.h"
 #include "Renderer.h"
 #include "Timer.h"
@@ -47,6 +45,7 @@ namespace BINI
 		const std::string backgroundPath = "assets/Cover_Images/BINI_COVER_6.png";
 		const std::string musicPath = "assets/music/easy1.ogg";
 		const std::string chartPath = "charts/easy.bchart";
+		const std::string songTitle = "ISLANG PANTROPIKO";
 
 		//Scores
 		float accuracy = 100.f;

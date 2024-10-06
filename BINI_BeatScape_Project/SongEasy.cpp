@@ -47,7 +47,7 @@ namespace BINI
 		white = { 255, 255, 255 };
 
 		//Labels
-		title = new BINI::Labels(renderer, steelar, "ISLANG PANTROPIKO", white);
+		title = new BINI::Labels(renderer, steelar, songTitle, white);
 		bini = new BINI::Labels(renderer, bebas, "BINI", black);
 		accuracyLabel = new BINI::Labels(renderer, bebas, "100.00%", black);
 		scoreLabel = new BINI::Labels(renderer, steelar, "0", white);
@@ -274,10 +274,6 @@ namespace BINI
 			oldBeat = currentBeat;
 			beat++;
 			beatDuration = songDurationTimer->getTicks();
-			if (!currentBars.empty() && currentBars.front() != NULL)	//debug
-			{
-				std::cout << currentBars.front()->totalY << "\n";
-			}
 			songDurationTimer->start();
 			if (beat <= 4)
 				sfx->playSFX();
@@ -404,7 +400,6 @@ namespace BINI
 				{
 					if (currentBars.front()->d != NULL || currentBars.front()->f != NULL || currentBars.front()->j != NULL || currentBars.front()->k != NULL)
 					{
-						std::cout << "Miss\n";
 						currentCombo = 0;
 						--perfectNotes;
 						noteHitValue = MISS;
@@ -759,7 +754,6 @@ namespace BINI
 			diff = (int)fabsf(beatDuration - humanDuration);
 		}
 		
-		std::cout << "Difference: " << diff << "\n";
 		if (diff <= 117)
 		{
 			noteAcc = PERFECT;
@@ -871,9 +865,6 @@ namespace BINI
 					}
 					break;
 				}
-
-				std::cout << "Current Score: " << score << "\n"
-					<< "Current Combo: " << currentCombo << "\n";
 			}
 
 			//if key is released
@@ -1027,7 +1018,6 @@ namespace BINI
 //		//Metronome
 //		if (timer->getTicks() % 625 <= 16 && timer->isStarted() && timer->getTicks() > 625)
 //		{
-//			std::cout << beat++ << "\n";
 //			if (beat <= 8)
 //				sfx->playSFX();
 //		}
