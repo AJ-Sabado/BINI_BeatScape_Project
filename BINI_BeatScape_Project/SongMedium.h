@@ -42,9 +42,9 @@ namespace BINI
 	private:
 
 		//Parameters
-		const int maxNotes = 322;
+		const int maxNotes = 620;
 		const int maxScore = 750000;
-		const int bpm = 120;
+		const int bpm = 240;
 		const std::string backgroundPath = "assets/Cover_Images/BINI_COVER_5.png";
 		const std::string musicPath = "assets/music/medium1.ogg";
 		const std::string chartPath = "charts/medium.bchart";

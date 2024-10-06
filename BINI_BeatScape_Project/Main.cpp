@@ -82,7 +82,7 @@ int main(int argc, char* args[])
 				currentScene = company;
 				break;
 			case BINI_START:
-				//mainmenu = new BINI::MainMenu(&renderer);
+				mainmenu = new BINI::MainMenu(&renderer);
 				currentScene = mainmenu;
 				break;
 			case BINI_SONG_EASY:

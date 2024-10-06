@@ -125,7 +125,7 @@ namespace BINI
 
 		//Note velocity
 		noteScrollTime = 120.f / bpm;
-		noteYVelocity = (renderer->getMaxHeight() - accuracyPanel->getHeight() - fret->getHeight()) / noteScrollTime;
+		noteYVelocity = (renderer->getMaxHeight() - accuracyPanel->getHeight() - fret->getHeight()) / noteScrollTime / 2;
 		bar = currentBars.begin();
 	}
 
@@ -277,9 +277,9 @@ namespace BINI
 			beat++;
 			beatDuration = songDurationTimer->getTicks();
 			songDurationTimer->start();
-			if (beat <= 4)
+			if (beat <= 8 && beat % 2 == 1)
 				sfx->playSFX();
-			if (!chart.empty() && beat >= 3)
+			if (!chart.empty() && beat >= 5)
 			{
 				if (chart.front() != NULL)
 					currentBars.push_back(chart.front());
@@ -303,7 +303,7 @@ namespace BINI
 		}
 
 		//Fade out
-		if (!fadingIn && beat > 468)
+		if (!fadingIn && beat > 936)
 		{
 			if (sceneAlpha - 2 < 0)
 			{
@@ -320,7 +320,7 @@ namespace BINI
 
 
 		//Song controls
-		if (beat == 5 && !song->isPlaying())
+		if (beat == 9 && !song->isPlaying())
 		{
 			song->startMusic(0);
 			songDurationTimer->start();
@@ -377,7 +377,7 @@ namespace BINI
 		}
 
 		//Note Processing
-		if (beat >= 3 && !currentBars.empty() && !isPaused)
+		if (beat >= 5 && !currentBars.empty() && !isPaused)
 		{
 			for (bar = currentBars.begin(); bar != currentBars.end();)
 			{
