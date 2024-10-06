@@ -19,6 +19,7 @@
 #include "MainMenu.h"
 #include "SongEasy.h"
 #include "SongMedium.h"
+#include "SongHard.h"
 #include "States.h"
 #include "Music.h"
 #include "CompanyLogo.h"
@@ -53,10 +54,11 @@ BINI::SongEasy* songeasy = nullptr;
 //BINI::SongSelect songSelect(&renderer);
 //BINI::Leaderboards leaderboards(&renderer);
 
-BINI::SongMedium* songmedium = new BINI::SongMedium(&renderer);
+BINI::SongMedium* songmedium = nullptr;
+BINI::SongHard* songhard = new BINI::SongHard(&renderer);
 
 //Current Scene Pointer
-BINI::Scene* currentScene = songmedium;
+BINI::Scene* currentScene = songhard;
 //BINI::Scene* currentScene = songeasy;
 
 int main(int argc, char* args[])

@@ -23,6 +23,7 @@
     <ClCompile Include="SongSelect.cpp" />
     <ClCompile Include="Leaderboards.cpp" />
     <ClCompile Include="SongMedium.cpp" />
+    <ClCompile Include="SongHard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -47,6 +48,7 @@
     <ClInclude Include="SongSelect.h" />
     <ClInclude Include="Leaderboards.h" />
     <ClInclude Include="SongMedium.h" />
+    <ClInclude Include="SongHard.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
