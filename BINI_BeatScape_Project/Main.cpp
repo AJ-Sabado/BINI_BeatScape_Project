@@ -54,11 +54,9 @@ BINI::SongHard* songhard = nullptr;
 //Current Scene Pointer
 BINI::Scene* currentScene = company;
 
-
-bool exitRequested = false; // Flag to track exit state
-
 int main(int argc, char* args[])
 {
+
 	while (currentScene->handleEvents(&events))
 	{
 		//Clears screen
@@ -105,25 +103,17 @@ int main(int argc, char* args[])
 				break;
 			case BINI_EXIT:
 				BINI::Music::fadeOutMusic(1000);
-				renderer.fadingOut(1000);
-				exitRequested = true; // Mark exit as requested
+				SDL_Delay(1000);
 				break;
 			}
 		}
 
-		// Check for exit request and break out of the loop after fading out
-		if (exitRequested)
-		{
-			break; // Exit the loop to allow the application to clean up
-		}
-
 		//Draw current screen
-		if (currentScene) {
-			currentScene->display(&renderer);
-		}
+		currentScene->display(&renderer);
 
 		//Update screen
 		renderer.updateScreen();
+
 	}
 
 	return 0;
