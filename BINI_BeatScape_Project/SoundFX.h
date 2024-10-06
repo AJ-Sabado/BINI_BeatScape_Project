@@ -19,10 +19,15 @@ namespace BINI
 		//Plays stored SFX
 		void playSFX();
 
+		static void playSlideSFX();
+		static void playEnterSFX();
+
 	private:
 
 		Mix_Chunk* bSFX;
 	};
+
+
 }
 
 

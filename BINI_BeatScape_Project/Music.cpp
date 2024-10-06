@@ -55,3 +55,10 @@ bool BINI::Music::isPlaying()
 {
 	return Mix_PlayingMusic();
 }
+
+
+void BINI::Music::fadeOutMusic(int duration)
+{
+	// Fade out music over the specified duration
+	Mix_FadeOutMusic(duration);
+}

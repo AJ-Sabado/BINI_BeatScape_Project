@@ -12,10 +12,10 @@
 
 namespace BINI {
 
-	class SongSelect : public Scene {
+	class Leaderboards : public Scene {
 	public:
-		explicit SongSelect(BINI::Renderer* renderer);
-		~SongSelect() override = default;
+		explicit Leaderboards(BINI::Renderer* renderer);
+		~Leaderboards() override = default;
 
 		void display(BINI::Renderer* renderer) override;
 		bool isDone() override;
@@ -28,19 +28,19 @@ namespace BINI {
 		size_t currentIndex{ 0 };
 		Uint32 lastSwitchTime{ 0 };
 		static constexpr int SLIDE_DURATION{ 5000 };
+		std::vector<Background*> backgrounds;
+		Texture* shade;
+
 
 		//Textures
-		Texture* header;
-		Texture* pantropiko_easy;
-		Texture* salamin_mid;
-		Texture* cherry_hard;
+		Texture* LB_Header;
+		Texture* Top_1;
+		Texture* Top_2;
+		Texture* Top_3;
+		Texture* LB_Main;
 
 		//Selection
 		int state = 1;
-
-
-		std::vector<Background*> backgrounds;
-		Texture* shade;
 
 		bool done;
 	};

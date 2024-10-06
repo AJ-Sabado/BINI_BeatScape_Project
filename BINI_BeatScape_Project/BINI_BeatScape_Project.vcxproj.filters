@@ -20,6 +20,8 @@
     <ClCompile Include="Note.cpp" />
     <ClCompile Include="SongBar.cpp" />
     <ClCompile Include="ChartReader.cpp" />
+    <ClCompile Include="SongSelect.cpp" />
+    <ClCompile Include="Leaderboards.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -41,6 +43,8 @@
     <ClInclude Include="Note.h" />
     <ClInclude Include="SongBar.h" />
     <ClInclude Include="ChartReader.h" />
+    <ClInclude Include="SongSelect.h" />
+    <ClInclude Include="Leaderboards.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
