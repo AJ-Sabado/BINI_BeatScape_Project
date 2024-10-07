@@ -17,7 +17,7 @@ namespace BINI {
     class MainMenu : public Scene {
     public:
         explicit MainMenu(Renderer* renderer);
-        ~MainMenu() override = default;
+        ~MainMenu();
 
         MainMenu(const MainMenu&) = delete;
         MainMenu& operator=(const MainMenu&) = delete;

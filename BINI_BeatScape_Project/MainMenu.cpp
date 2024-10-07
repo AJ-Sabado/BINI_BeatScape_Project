@@ -7,7 +7,7 @@ namespace BINI {
         done = false;
 
         //Initializing BG Music
-        bgMusic = new Music("assets/music/Menu/Salamin_Rock.mp3");
+        Music::playBGMusic();
 
         //LABELS AND FONT DECLARATIONS
         menuFont = new Font("assets/fonts/Steelar-j9Vnj.ttf", 28);
@@ -23,6 +23,13 @@ namespace BINI {
         bgShade = std::make_unique<Texture>(renderer, "assets/Cover_Images/SHADE.png"); //GRADIENT SHADE
         baseTexture = std::make_unique<Texture>(renderer, "assets/textures/HOME_PAGE_ASSET/HOME_BASE2.png"); //STAGE
         biniBeatscapeLogo = std::make_unique<Texture>(renderer, "assets/Logo/Bini_BeatScape_Logo_Resized.png"); //LOGO
+    }
+
+    MainMenu::~MainMenu() {
+        delete menuFont;
+        delete startLabel;
+        delete leaderboardsLabel;
+        delete exitLabel;
     }
 
     void MainMenu::initializeBackgrounds(Renderer* renderer) {

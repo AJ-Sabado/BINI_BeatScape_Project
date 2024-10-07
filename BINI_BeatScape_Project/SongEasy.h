@@ -15,6 +15,7 @@
 #include "sstream"
 #include "iomanip"
 #include "math.h"
+#include "SoundFX.h"
 
 namespace BINI
 {
@@ -40,7 +41,7 @@ namespace BINI
 
 		//Parameters
 		const int maxNotes = 235;
-		const int maxScore = 500000;
+		const int maxScore = 50000;
 		const int bpm = 96;
 		const std::string backgroundPath = "assets/Cover_Images/BINI_COVER_6.png";
 		const std::string musicPath = "assets/music/easy1.ogg";

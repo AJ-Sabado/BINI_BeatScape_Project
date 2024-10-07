@@ -25,6 +25,7 @@
 #include "CompanyLogo.h"
 #include "SongSelect.h"
 #include "Leaderboards.h"
+#include "GameOver.h"
 
 //Parameters for fine tuning.
 const int SCREEN_WIDTH = 1280;
@@ -50,6 +51,7 @@ BINI::Leaderboards* leaderboards = nullptr;
 BINI::SongEasy* songeasy = nullptr;
 BINI::SongMedium* songmedium = nullptr;
 BINI::SongHard* songhard = nullptr;
+BINI::GameOver* gameOver;
 
 //Current Scene Pointer
 BINI::Scene* currentScene = company;
@@ -57,7 +59,7 @@ BINI::Scene* currentScene = company;
 int main(int argc, char* args[])
 {
 
-	while (currentScene->handleEvents(&events))
+	while (currentScene->handleEvents(&events) && currentScene != NULL)
 	{
 		//Clears screen
 		renderer.clearScreen();
@@ -101,6 +103,10 @@ int main(int argc, char* args[])
 				songhard = new BINI::SongHard(&renderer);
 				currentScene = songhard;
 				break;
+			case BINI_GAME_OVER:
+				gameOver = new BINI::GameOver(&renderer);
+				currentScene = gameOver;
+				break;
 			case BINI_EXIT:
 				BINI::Music::fadeOutMusic(1000);
 				SDL_Delay(1000);
@@ -108,12 +114,16 @@ int main(int argc, char* args[])
 			}
 		}
 
+		if (currentScene == NULL)
+		{
+			break;
+		}
+
 		//Draw current screen
 		currentScene->display(&renderer);
 
 		//Update screen
 		renderer.updateScreen();
-
 	}
 
 	return 0;

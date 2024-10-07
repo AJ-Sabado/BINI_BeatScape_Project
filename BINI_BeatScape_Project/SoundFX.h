@@ -3,6 +3,7 @@
 #include "SDL_mixer.h"
 #include "string"
 #include "iostream"
+#include "SDL.h"
 
 namespace BINI
 {
@@ -21,6 +22,8 @@ namespace BINI
 
 		static void playSlideSFX();
 		static void playEnterSFX();
+		static void playGOLose();
+		static void playGOSuccess();
 
 	private:
 

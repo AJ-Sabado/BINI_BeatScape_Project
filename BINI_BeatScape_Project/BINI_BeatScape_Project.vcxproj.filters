@@ -24,6 +24,9 @@
     <ClCompile Include="Leaderboards.cpp" />
     <ClCompile Include="SongMedium.cpp" />
     <ClCompile Include="SongHard.cpp" />
+    <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="LeaderboardManager.cpp" />
+    <ClCompile Include="ScoreContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -49,6 +52,9 @@
     <ClInclude Include="Leaderboards.h" />
     <ClInclude Include="SongMedium.h" />
     <ClInclude Include="SongHard.h" />
+    <ClInclude Include="GameOver.h" />
+    <ClInclude Include="LeaderboardManager.h" />
+    <ClInclude Include="ScoreContainer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

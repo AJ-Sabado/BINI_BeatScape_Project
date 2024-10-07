@@ -18,6 +18,14 @@ namespace BINI {
 		Top_3 = new Texture(renderer, "assets/textures/LEADERBOARDS_ASSET/LB_TOP_3.png");
 		LB_Main = new Texture(renderer, "assets/textures/LEADERBOARDS_ASSET/LB_MAIN_FS.png");
 
+		//LABELS AND FONTS
+		steelar = new Font("assets/fonts/Steelar-j9Vnj.ttf", 40);
+		bebasSmall = new Font("assets/fonts/BebasNeue-Regular.ttf", 39);
+		bebasBig = new Font("assets/fonts/BebasNeue-Regular.ttf", 49);
+
+		lb_labels_1 = new Labels(renderer, steelar, "", black);
+		lb_labels_2 = new Labels(renderer, bebasSmall, "", white);
+		lb_labels_3 = new Labels(renderer, bebasBig, "", white);
 	}
 
 	Leaderboards::~Leaderboards() {
@@ -50,6 +58,80 @@ namespace BINI {
 		Top_3->render(renderer, 0, 0, nullptr);
 		LB_Main->render(renderer, 0, 0, nullptr);
 
+		//DISPLAYING TOP 3 LABELS
+		lb_labels_1->setText(renderer, steelar, "AAA - 00000", black);
+		lb_labels_2->setText(renderer, bebasSmall, "----", white);
+		lb_labels_3->setText(renderer, bebasBig, "----", white);
+
+		BINI::ScoreContainer* current = scoreList;
+
+
+		
+
+		
+		
+		//TOP 1 - 3
+		for (int i = 0; i < 3; i++)
+		{
+			if (current != NULL)
+			{
+				textstream.str("");
+				textstream << current->userInitials << " - " << current->score;
+				lb_labels_1->setText(renderer, steelar, textstream.str().c_str(), black);
+				lb_labels_1->render(renderer, 155, 180 + i * top3Diff);
+
+				textstream.str("");
+				textstream << current->userDifficulty;
+				lb_labels_2->setText(renderer, bebasSmall, textstream.str().c_str(), white);
+				lb_labels_2->render(renderer, 240, 234 + i * top3Diff);
+
+				textstream.str("");
+				textstream << std::fixed << std::setprecision(2) << current->accuracy << "%";
+				lb_labels_2->setText(renderer, bebasSmall, textstream.str().c_str(), white);
+				lb_labels_2->render(renderer, 400, 234 + i * top3Diff);
+
+				textstream.str("");
+				textstream << current->maxCombo;
+				lb_labels_3->setText(renderer, bebasSmall, textstream.str().c_str(), white);
+				lb_labels_3->render(renderer, 270, 266 + i * top3Diff);
+				current = current->next;
+			}
+			else
+			{
+				lb_labels_1->setText(renderer, steelar, "AAA - 00000", black);
+				lb_labels_2->setText(renderer, bebasSmall, "----", white);
+				lb_labels_3->setText(renderer, bebasBig, "----", white);
+
+				lb_labels_1->render(renderer, 155, 180 + i * top3Diff);
+				lb_labels_2->render(renderer, 240, 234 + i * top3Diff);
+				lb_labels_2->render(renderer, 400, 234 + i * top3Diff);
+				lb_labels_3->render(renderer, 270, 266 + i * top3Diff);
+
+			}
+			
+			
+			
+			
+		}
+		
+
+		
+		for (int i = 0; i <= 10; i++) {
+
+			if (current != NULL)
+			{
+				textstream.str("");
+				textstream << current->userInitials << " - " << current->userDifficulty << " - " << current->score;
+				lb_labels_1->setText(renderer, steelar, textstream.str().c_str(), white);
+				current = current->next;
+			}
+			else
+			{
+				lb_labels_1->setText(renderer, steelar, "AAA - **** - 00000", white);
+			}
+
+			lb_labels_1->render(renderer, 685, 100+(i*lb_height));
+		}
 	}
 
 	bool Leaderboards::isDone() {
@@ -59,6 +141,14 @@ namespace BINI {
 	bool Leaderboards::handleEvents(Events* events) {
 		while (events->pollEvents() != 0)
 		{
+
+			//Load Scores
+			if (events->getScoreList() != NULL && scoreList == NULL)
+			{
+				std::cout << "Once\n";
+				scoreList = events->getScoreList();
+			}
+
 			//User exits
 			if (events->type() == SDL_QUIT)
 			{

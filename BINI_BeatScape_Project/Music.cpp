@@ -12,11 +12,11 @@ BINI::Music::Music(std::string path)
 BINI::Music::~Music()
 {
 	if (bMusic != NULL)
-	{
-		stopMusic();
-		Mix_FreeMusic(bMusic);
-		bMusic = NULL;
-	}
+    {
+        Mix_HaltMusic();  
+        Mix_FreeMusic(bMusic);
+        bMusic = NULL;
+    }
 }
 
 void BINI::Music::startMusic(int loops)
@@ -59,15 +59,10 @@ bool BINI::Music::isPlaying()
 
 void BINI::Music::fadeOutMusic(int duration)
 {
-	// Fade out music over the specified duration
 	Mix_FadeOutMusic(duration);
 }
 
-//void BINI::Music::playBGMusic() {
-//	BINI::Music* music = new Music("assets/music/Menu/Salamin_Rock.mp3");
-//	music->playBGMusic;
-//}
-//
-//void BINI::Music::endBGMusic() {
-//
-//}
+void BINI::Music::playBGMusic() {
+	static Music bgMusic("assets/music/Menu/Salamin_Rock.mp3");
+	bgMusic.startMusic(-1);
+}

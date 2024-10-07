@@ -24,12 +24,24 @@ void BINI::SoundFX::playSFX()
 	Mix_PlayChannel(-1, bSFX, 0);
 }
 
-void BINI::SoundFX::playSlideSFX() {
-	SoundFX* slide = new SoundFX("assets/sfx/menuSlideSFX.wav");
-	slide->playSFX();
+void BINI::SoundFX::playSlideSFX()
+{
+	static SoundFX slide("assets/sfx/menuSlideSFX.wav");
+	slide.playSFX();
 }
 
-void BINI::SoundFX::playEnterSFX() {
-	SoundFX* enter = new SoundFX("assets/sfx/Enter_Pressed_SFX.wav");
-	enter->playSFX();
+void BINI::SoundFX::playEnterSFX()
+{
+	static SoundFX enter("assets/sfx/Enter_Pressed_SFX.wav"); 
+	enter.playSFX();
+}
+
+void BINI::SoundFX::playGOLose() {
+	static SoundFX lose("assets/sfx/Gave_Over_Failed.wav");
+	lose.playSFX();
+}
+
+void BINI::SoundFX::playGOSuccess() {
+	static SoundFX lose("assets/sfx/Game_over_completed.wav");
+	lose.playSFX();
 }

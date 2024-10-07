@@ -18,6 +18,20 @@ namespace BINI {
 		cherry_hard = new Texture(renderer, "assets/textures/SONG_SELECT/SONG SELECT ASSETS IN PNG/CHERRY_FS.png");
 	}
 
+	SongSelect::~SongSelect() {
+		delete shade;
+		delete header;
+		delete pantropiko_easy;
+		delete salamin_mid;
+		delete cherry_hard;
+
+		for (auto& background : backgrounds) {
+			delete background;
+		}
+
+		backgrounds.clear();
+	}
+
 	void SongSelect::display(Renderer* renderer) {
 		Uint32 now = SDL_GetTicks();
 		if (now - lastSwitchTime > SLIDE_DURATION) {

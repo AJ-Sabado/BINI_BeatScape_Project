@@ -5,6 +5,8 @@
 #include "SoundFX.h"
 #include "iostream"
 #include "string"
+#include "LeaderboardManager.h";
+#include "ScoreContainer.h"
 
 namespace BINI
 {
@@ -38,7 +40,10 @@ namespace BINI
 		void setState(int state);
 
 		//Stores user data for leaderboard export
-		void setUserData( int score, int maxcombo);
+		void setUserData( int score, int maxcombo, std::string difficulty = "", float accuracy = 0.f);
+
+		//Stores user initials
+		void setUserInitials(std::string initials);
 
 		//Returns user score
 		int getUserScore();
@@ -46,9 +51,23 @@ namespace BINI
 		//Returns user max combo
 		int getUserMaxCombo();
 
+		//Returns user accuracy
+		float getUserAccuracy();
+
+		//Reutrns user initials
+		std::string getUserInitials();
+
+		//Returns user difficulty
+		std::string getUserDifficulty();
+
+		//exports data to log
+		void exportData();
 
 		//Removes previously stored user data
 		void clearUserData();
+
+		//Returns scores in the form of a ScoreContainer list
+		BINI::ScoreContainer* getScoreList();
 
 
 	private:
@@ -60,10 +79,27 @@ namespace BINI
 		int currentState;
 
 		//Current User score
-		int userScore;
+		int userScore = 0;
 
 		//Current User max combo
-		int userMaxCombo;
+		int userMaxCombo = 0;
+
+		//Current User accuracy
+		float userAccuracy = 0.f;
+
+		//Current user difficulty
+		std::string userDifficulty = "";
+
+		//Current User Initials
+		std::string userInitials = "";
+
+		//Leaderboard file location
+		const std::string leadboardPath = "leaderboard/leaderboard.bBoard";
+
+		//Leaderboard manager
+		BINI::LeaderboardManager* leaderboardmanager;
+
+		
 
 	};
 }

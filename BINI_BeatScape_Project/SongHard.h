@@ -41,7 +41,7 @@ namespace BINI
 
 		//Parameters
 		const int maxNotes = 596;
-		const int maxScore = 1000000;
+		const int maxScore = 99999;
 		const int bpm = 300;
 		const std::string backgroundPath = "assets/Cover_Images/BINI_COVER_4.png";
 		const std::string musicPath = "assets/music/hard1.ogg";

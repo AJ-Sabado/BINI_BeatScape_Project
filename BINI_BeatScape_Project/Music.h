@@ -36,14 +36,11 @@ namespace BINI
 		//Returns true if music is playing.
 		bool isPlaying();
 
-		/*static void playBGMusic();
-		static void endBGMusic();*/
+		static void playBGMusic();
 
 	private:
 		//Mixer hardware
 		Mix_Music* bMusic;
-
-		
 	};
 }
 

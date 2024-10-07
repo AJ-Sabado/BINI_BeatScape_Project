@@ -741,14 +741,29 @@ namespace BINI
 
 	bool SongMedium::handleEvents(BINI::Events* events)
 	{
-		if (!fadingIn && !isPaused && sceneAlpha == 0)
+		//Game Over Event
+		if (beat > 936 || accuracy < 65.f)
 		{
-			//Store user results
-			events->setUserData(score, maxCombo);
+			if (sceneAlpha == 255)
+			{
+				std::cout << "Is Running" << "\n";
 
-			//Sets next scene
-			events->setState(BINI_LOGO);
+				//Store user results
+				events->setUserData(score, maxCombo, "Medium", accuracy);
 
+				if (accuracy < 65.f) {
+					SoundFX::playGOLose();
+				}
+				if (beat > 936) {
+					SoundFX::playGOSuccess();
+				}
+				//Sets next scene
+				events->setState(BINI_GAME_OVER);
+
+				timer->stop();
+				songDurationTimer->stop();
+				stepTimer->stop();
+			}
 		}
 
 		while (events->pollEvents() != 0)

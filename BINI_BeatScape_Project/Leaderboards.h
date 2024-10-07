@@ -8,6 +8,9 @@
 #include "Labels.h"
 #include "Renderer.h"
 #include "Texture.h"
+#include "ScoreContainer.h"
+#include "sstream"
+#include "iomanip"
 #include <vector>
 
 namespace BINI {
@@ -39,10 +42,31 @@ namespace BINI {
 		Texture* Top_3;
 		Texture* LB_Main;
 
+		//LABELS
+		Font* steelar;
+		Font* steelarWhite;
+		Font* bebasSmall;
+		Font* bebasBig;
+		Labels* lb_labels_1;
+		Labels* lb_labels_2;
+		Labels* lb_labels_3;
+		SDL_Color black = { 0,0,0,255 };
+		SDL_Color white = { 255,255,255,255 };
+
+		const int lb_height = 50;
+
 		//Selection
 		int state = 1;
 
+		//Scores
+		BINI::ScoreContainer* scoreList = NULL;
+
+		//
+		std::stringstream textstream;
+
 		bool done;
+
+		int top3Diff = 186; //185
 	};
 
 }
