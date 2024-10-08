@@ -10,7 +10,7 @@ BINI::Window::Window(BINI::Application* application, int width, int height)
 	{
 		SCREEN_WIDTH = width;
 		SCREEN_HEIGHT = height;
-		bWindow = SDL_CreateWindow("BINI BeatScape", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		bWindow = SDL_CreateWindow("BINI BeatScape", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN);
 		if (bWindow == NULL)
 		{
 			std::cout << "Unable to create new window. SDL Error: " << SDL_GetError() << "\n";
