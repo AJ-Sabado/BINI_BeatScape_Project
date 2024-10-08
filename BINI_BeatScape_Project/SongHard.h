@@ -18,6 +18,7 @@
 
 namespace BINI
 {
+	//Song hard scene
 	class SongHard : public BINI::Scene
 	{
 	public:
@@ -137,6 +138,7 @@ namespace BINI
 		//flags
 		bool done;
 		bool fadingIn;
+		bool executedEnd;
 		bool isPaused;
 		int noteHitValue;
 

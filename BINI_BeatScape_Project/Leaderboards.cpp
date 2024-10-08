@@ -71,6 +71,8 @@ namespace BINI {
 		
 		
 		//TOP 1 - 3
+
+		bool stopReading = false;
 		for (int i = 0; i < 3; i++)
 		{
 			if (current != NULL)
@@ -98,15 +100,19 @@ namespace BINI {
 			}
 			else
 			{
-				lb_labels_1->setText(renderer, steelar, "AAA - 00000", black);
-				lb_labels_2->setText(renderer, bebasSmall, "----", white);
-				lb_labels_3->setText(renderer, bebasBig, "----", white);
+				if (!stopReading)
+				{
+					lb_labels_1->setText(renderer, steelar, "AAA - 00000", black);
+					lb_labels_2->setText(renderer, bebasSmall, "----", white);
+					lb_labels_3->setText(renderer, bebasBig, "----", white);
+					stopReading = true;
+				}
+				
 
 				lb_labels_1->render(renderer, 155, 180 + i * top3Diff);
 				lb_labels_2->render(renderer, 240, 234 + i * top3Diff);
 				lb_labels_2->render(renderer, 400, 234 + i * top3Diff);
 				lb_labels_3->render(renderer, 270, 266 + i * top3Diff);
-
 			}
 			
 			

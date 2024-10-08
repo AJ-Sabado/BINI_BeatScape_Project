@@ -20,6 +20,7 @@
 
 namespace BINI
 {
+	//Song Medium Scene
 	class SongMedium : public BINI::Scene
 	{
 	public:
@@ -140,6 +141,7 @@ namespace BINI
 		bool done;
 		bool fadingIn;
 		bool isPaused;
+		bool executedEnd;
 		int noteHitValue;
 
 		//Object Alphas

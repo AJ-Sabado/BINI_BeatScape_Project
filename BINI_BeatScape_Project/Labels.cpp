@@ -22,6 +22,15 @@ BINI::Labels::~Labels()
 
 void BINI::Labels::setText(BINI::Renderer* renderer, BINI::Font* font, std::string textureText, SDL_Color textColor)
 {
+	//remove old texture
+	if (lTexture != NULL)
+	{
+		SDL_DestroyTexture(lTexture);
+		lTexture = NULL;
+		lWidth = 0;
+		lHeight = 0;
+	}
+
 	SDL_Surface* textSurface = TTF_RenderText_Solid(font->getFont(), textureText.c_str(), textColor);
 	if (textSurface == NULL)
 	{

@@ -11,15 +11,20 @@
 #include "ScoreContainer.h"
 #include "sstream"
 #include "iomanip"
+#include "queue"
 #include <vector>
 
 namespace BINI {
-
+	//Leaderboard Scene Class
 	class Leaderboards : public Scene {
 	public:
+		//Constructor
 		explicit Leaderboards(BINI::Renderer* renderer);
+		
+		//Destructor
 		~Leaderboards() override ;
 
+		//Inherited methods from Scene
 		void display(BINI::Renderer* renderer) override;
 		bool isDone() override;
 		bool handleEvents(BINI::Events* events) override;
@@ -61,7 +66,7 @@ namespace BINI {
 		//Scores
 		BINI::ScoreContainer* scoreList = NULL;
 
-		//
+		//Text stream
 		std::stringstream textstream;
 
 		bool done;

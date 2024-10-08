@@ -90,6 +90,7 @@ namespace BINI
 		done = false;
 		fadingIn = true;
 		isPaused = false;
+		executedEnd = false;
 
 		//Alphas
 		sceneAlpha = 0;
@@ -744,9 +745,10 @@ namespace BINI
 		//Game Over Event
 		if (beat > 936 || accuracy < 65.f)
 		{
-			if (sceneAlpha == 255)
+			if (!executedEnd)
 			{
-				std::cout << "Is Running" << "\n";
+				//Sets next scene
+				events->setState(BINI_GAME_OVER);
 
 				//Store user results
 				events->setUserData(score, maxCombo, "Medium", accuracy);
@@ -754,15 +756,14 @@ namespace BINI
 				if (accuracy < 65.f) {
 					SoundFX::playGOLose();
 				}
-				if (beat > 936) {
+				if (beat > 872) {
 					SoundFX::playGOSuccess();
 				}
-				//Sets next scene
-				events->setState(BINI_GAME_OVER);
 
 				timer->stop();
 				songDurationTimer->stop();
 				stepTimer->stop();
+				executedEnd = true;
 			}
 		}
 
