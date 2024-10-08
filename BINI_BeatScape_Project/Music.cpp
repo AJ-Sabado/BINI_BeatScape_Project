@@ -11,6 +11,7 @@ BINI::Music::Music(std::string path)
 
 BINI::Music::~Music()
 {
+	//Cleanup
 	if (bMusic != NULL)
     {
         Mix_HaltMusic();  

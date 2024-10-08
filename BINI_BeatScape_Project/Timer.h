@@ -4,18 +4,29 @@
 
 namespace BINI
 {
+	//Performs timing functions. Operates through SDL time calculation system.
 	class Timer
 	{
 	public:
-
+		//Constructor
 		Timer();
 
+		//Destructor
 		~Timer();
 
+		//Starts timer from the begininning.
 		void start();
+
+		//Stops timer
 		void stop();
+
+		//Pauses timer.
 		void pause();
+
+		//Resumes timer.
 		void unpause();
+
+		//Restarts timer.
 		void restart();
 
 		//Gets the timer's time

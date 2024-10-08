@@ -39,6 +39,7 @@ BINI::Texture::Texture(BINI::Renderer* renderer, std::string path)
 
 BINI::Texture::~Texture()
 {
+	//Cleanup
 	if (bTexture != NULL)
 	{
 		SDL_DestroyTexture(bTexture);

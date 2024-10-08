@@ -16,15 +16,26 @@ namespace BINI
 
 	SongBar::~SongBar()
 	{
-		delete d;
-		d = nullptr;
-		delete f;
-		f = nullptr;
-		delete j;
-		j = nullptr;
-		delete k;
-		k = nullptr;
-
-		//std::cout << "Bar deleted.\n";
+		//Cleanup
+		if (d != NULL)
+		{
+			delete d;
+			d = nullptr;
+		}
+		if (f != NULL)
+		{
+			delete f;
+			f = nullptr;
+		}
+		if (j != NULL)
+		{
+			delete j;
+			j = nullptr;
+		}
+		if (k != NULL)
+		{
+			delete k;
+			k = nullptr;
+		}
 	}
 }

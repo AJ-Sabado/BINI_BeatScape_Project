@@ -19,6 +19,7 @@ namespace BINI {
 	}
 
 	SongSelect::~SongSelect() {
+		//Cleanup
 		delete shade;
 		delete header;
 		delete pantropiko_easy;

@@ -4,8 +4,10 @@ namespace BINI
 {
 	LeaderboardManager::LeaderboardManager(std::string path)
 	{
+		//Loads leaderboard file from specified path
 		std::ifstream myFile(path);
-
+		
+		//Creates new leaderboard file if specified path is not found
 		if (!myFile.is_open())
 		{
 			std::ofstream newFile(path);
@@ -23,6 +25,7 @@ namespace BINI
 		std::string line;
 		ScoreContainer* temp;
 
+		//Parses leaderboard .bBoard file
 		while (getline(myFile, line))
 		{
 			std::string userInitials = line;
@@ -57,6 +60,7 @@ namespace BINI
 
 	LeaderboardManager::~LeaderboardManager()
 	{
+		//Cleanup
 		if (head == NULL)
 		{
 			return;
@@ -80,6 +84,8 @@ namespace BINI
 
 	void LeaderboardManager::addItem(ScoreContainer* newScore)
 	{
+		//This function inserts new score to the score list through insertion sort.
+
 		if (head == NULL)
 		{
 			head = newScore;
@@ -122,7 +128,7 @@ namespace BINI
 
 	void LeaderboardManager::exportFile(std::string path)
 	{
-		displayList();
+		displayList();	//for debugging
 		std::ofstream newFile(path);
 
 		ScoreContainer* current = head;
@@ -141,6 +147,7 @@ namespace BINI
 
 	}
 	
+	//displays list on console	*debug
 	void LeaderboardManager::displayList()
 	{
 		ScoreContainer* current = head;

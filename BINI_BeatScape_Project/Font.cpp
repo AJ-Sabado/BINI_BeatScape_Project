@@ -7,6 +7,7 @@ BINI::Font::Font(std::string path, int ptSize)
 
 BINI::Font::~Font()
 {
+	//Cleanup
 	if (bFont != NULL)
 	{
 		TTF_CloseFont(bFont);

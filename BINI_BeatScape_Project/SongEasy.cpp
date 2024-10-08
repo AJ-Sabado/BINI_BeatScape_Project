@@ -59,6 +59,7 @@ namespace BINI
 		JButton = new BINI::Labels(renderer, bebasBig, "J", white);
 		KButton = new BINI::Labels(renderer, bebasBig, "K", white);
 
+		//Set texture blendmodes
 		title->setBlendMode(SDL_BLENDMODE_BLEND);
 		bini->setBlendMode(SDL_BLENDMODE_BLEND);
 		accuracyLabel->setBlendMode(SDL_BLENDMODE_BLEND);
@@ -735,6 +736,7 @@ namespace BINI
 
 	Uint8 SongEasy::barHighlightsfadeOut(Uint8 highlight)
 	{
+		//Fades out bar highlights textures
 		if (highlight - 10 < 0)
 		{
 			return 0;
@@ -747,6 +749,7 @@ namespace BINI
 
 	int SongEasy::getAccuracy()
 	{
+		//Accuracy calculations
 		int noteAcc = 0;
 		int humanDuration = songDurationTimer->getTicks();
 		int diff = 0;

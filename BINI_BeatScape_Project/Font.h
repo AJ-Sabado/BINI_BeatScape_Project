@@ -15,6 +15,7 @@ namespace BINI
 		//Font deconstructor.
 		~Font();
 
+		//Returns hardware font for labels to use
 		inline TTF_Font* getFont() { return bFont; }
 
 	private:

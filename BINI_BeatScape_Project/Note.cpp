@@ -14,6 +14,7 @@ namespace BINI
 
 	void Note::kill()
 	{
+		//Destroys note
 		isAlive = false;
 	}
 }

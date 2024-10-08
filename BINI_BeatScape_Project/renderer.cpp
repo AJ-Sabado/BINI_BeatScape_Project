@@ -21,6 +21,7 @@ BINI::Renderer::Renderer(BINI::Window* window)
 
 BINI::Renderer::~Renderer()
 {
+	//Cleanup
 	if (bRenderer != NULL)
 	{
 		SDL_DestroyRenderer(bRenderer);

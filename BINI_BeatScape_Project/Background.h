@@ -13,7 +13,7 @@ namespace BINI
 		//Background constructor.
 		Background(BINI::Renderer* renderer, std::string path);
 
-		//Background deconstructor.
+		//Background destructor.
 		~Background();
 
 		//Renders the background.

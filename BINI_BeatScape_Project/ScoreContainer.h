@@ -4,6 +4,7 @@
 
 namespace BINI
 {
+	//Structure ScoreContainer. A list of this makes up a leaderboard.
 	struct ScoreContainer
 	{
 		int score = 0;

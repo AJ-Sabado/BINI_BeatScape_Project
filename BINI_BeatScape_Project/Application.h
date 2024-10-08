@@ -17,13 +17,14 @@ namespace BINI
 		//Application constructor.
 		Application();
 
-		//Application deconstructor.
+		//Application destructor.
 		~Application();
 
 		//Returns true if SDL and SDL image is initialized.
 		bool ready();
 
 	private:
+		//True if all components are successfuly initialized.
 		bool success;
 	};
 }

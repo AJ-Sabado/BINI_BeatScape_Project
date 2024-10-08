@@ -12,18 +12,27 @@
 #include "Music.h"
 
 namespace BINI {
+	//Gamevoer Scene class
 	class GameOver : public Scene{
+
 	public:
+		//Constructor
 		GameOver(Renderer* renderer);
+
+		//Destructor
 		~GameOver();
 
+		//Displays scene
 		virtual void display(Renderer* renderer);
 
+		//Returns true is scene is done/ready to transition
 		virtual bool isDone();
 
+		//Handles event for gameover scene
 		virtual bool handleEvents(BINI::Events* events);
 
 	private:
+
 		bool done;
 
 		//BG SLIDESHOW

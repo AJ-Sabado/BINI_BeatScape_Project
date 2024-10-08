@@ -23,8 +23,10 @@ namespace BINI
 		//Release duration of a note
 		int releaseDuration;
 
+		//If note is to be rendererd
 		bool isAlive;
 
+		//Sets isAlive to false
 		void kill();
 
 	};

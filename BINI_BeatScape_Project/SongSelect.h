@@ -12,12 +12,16 @@
 #include "Music.h"
 
 namespace BINI {
-
+	//Song select Scene class
 	class SongSelect : public Scene {
 	public:
+		//Constructor
 		explicit SongSelect(BINI::Renderer* renderer);
+
+		//Destructor
 		~SongSelect();
 
+		//Inherited Scene functions
 		void display(BINI::Renderer* renderer) override;
 		bool isDone() override;
 		bool handleEvents(BINI::Events* events) override;

@@ -309,11 +309,13 @@ namespace BINI
 			{
 				song->fadeOutMusic(1000);
 			}
+
 			if (sceneAlpha - 2 < 0)
 			{
 				sceneAlpha = 0;
 				stringStream.clear();
 				done = true;
+				
 			}
 			else
 			{

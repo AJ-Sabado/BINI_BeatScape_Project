@@ -8,7 +8,7 @@
 
 namespace BINI
 {
-	//Contains renderable texts
+	//Contains renderable texts and its texture
 	class Labels
 	{
 	public:

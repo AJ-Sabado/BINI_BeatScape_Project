@@ -104,6 +104,7 @@ void BINI::Events::clearUserData()
 
 void BINI::Events::exportData()
 {
+	//Performs leaderboard file export through leaderboard manager
 	BINI::ScoreContainer* temp = new BINI::ScoreContainer(userScore, userMaxCombo, userAccuracy, userInitials, userDifficulty);
 	leaderboardmanager->addItem(temp);
 	leaderboardmanager->exportFile(leadboardPath);

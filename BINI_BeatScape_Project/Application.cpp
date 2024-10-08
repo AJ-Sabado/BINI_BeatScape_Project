@@ -4,12 +4,14 @@ BINI::Application::Application()
 {
 	success = true;
 
+	//Intializes SDL video
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		std::cout << "SDL failed to initialize! SDL Error: " << SDL_GetError() << "\n";
 		success = false;
 	}
 
+	//Initializes SDL image
 	int imgFlags = IMG_INIT_PNG;
 	if (!(IMG_Init(imgFlags) & imgFlags) && success)
 	{
@@ -17,18 +19,21 @@ BINI::Application::Application()
 		success = false;
 	}
 	
+	//Initializes SDL font
 	if (TTF_Init() == -1)
 	{
 		std::cout << "SDL ttf failed to initialize! SDL ttf Error: " << TTF_GetError() << "\n";
 		success = false;
 	}
 
+	//Intializes SDL mixer for audio
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 	{
 		std::cout << "SDL mixer failed to initialize! SDL mixer Error: " << Mix_GetError() << "\n";
 		success = false;
 	}
 
+	//Turns linear texture filtering on to reduce jaggedness.
 	if (success)
 	{
 		if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
@@ -42,6 +47,7 @@ BINI::Application::Application()
 
 BINI::Application::~Application()
 {
+	//Component cleanup
 	Mix_Quit();
 	TTF_Quit();
 	IMG_Quit();

@@ -26,6 +26,7 @@ namespace BINI {
     }
 
     MainMenu::~MainMenu() {
+        //Cleanup
         delete menuFont;
         delete startLabel;
         delete leaderboardsLabel;

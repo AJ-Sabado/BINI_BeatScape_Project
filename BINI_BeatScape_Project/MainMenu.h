@@ -13,12 +13,16 @@
 #include "Music.h"
 
 namespace BINI {
-
+    //Main menu scene class
     class MainMenu : public Scene {
     public:
+        //Constructor
         explicit MainMenu(Renderer* renderer);
+
+        //Destructor
         ~MainMenu();
 
+        //Main menu operators
         MainMenu(const MainMenu&) = delete;
         MainMenu& operator=(const MainMenu&) = delete;
         MainMenu(MainMenu&&) = delete;

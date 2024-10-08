@@ -5,7 +5,7 @@
 
 namespace BINI 
 {
-	//Scene abstract class
+	//Scene abstract class inherited by MainMenu, CompanyLogo, Game Scenes, etc.
 	class Scene
 	{
 	public:

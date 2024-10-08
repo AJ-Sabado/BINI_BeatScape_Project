@@ -11,7 +11,7 @@
 namespace BINI
 {
 
-	//Handles events.
+	//Handles events through SDL event.
 	class Events
 	{
 	public:

@@ -10,6 +10,7 @@ BINI::Labels::Labels(BINI::Renderer* renderer, BINI::Font* font, std::string tex
 
 BINI::Labels::~Labels()
 {
+	//Cleanup
 	if (lTexture != NULL)
 	{
 		SDL_DestroyTexture(lTexture);

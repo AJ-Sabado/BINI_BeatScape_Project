@@ -5,10 +5,13 @@
 
 namespace BINI
 {
+	//Structure SongBar. A list of this makes up a chart. Also contains the 4 notes objects.
 	struct SongBar
 	{
+		//Constructor
 		SongBar();
 
+		//Destructor
 		~SongBar();
 
 		//Notes

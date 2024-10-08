@@ -6,7 +6,6 @@ namespace BINI {
 
 	CompanyLogo::CompanyLogo(Renderer* renderer) {
 		done = false;
-
 		steelar = new Font("assets/fonts/Steelar-j9Vnj.ttf", 28);
 		bebas = new Font("assets/fonts/BebasNeue-Regular.ttf", 30);
 		SDL_Color white = { 255,255,255,255 };
@@ -21,6 +20,7 @@ namespace BINI {
 	}
 
 	CompanyLogo::~CompanyLogo() {
+		//Clean up
 		delete background;
 		delete logo;
 		delete instruction;
@@ -77,8 +77,11 @@ namespace BINI {
 				switch (events->getKey())
 				{
 				case SDLK_RETURN:
-					enter = 1;
-					startTimeFadeOut = SDL_GetTicks();
+					if (enter != 1)
+					{
+						enter = 1;
+						startTimeFadeOut = SDL_GetTicks();
+					}
 					break;
 				}
 			}

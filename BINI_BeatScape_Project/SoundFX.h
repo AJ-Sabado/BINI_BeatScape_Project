@@ -20,13 +20,20 @@ namespace BINI
 		//Plays stored SFX
 		void playSFX();
 
+		//Plays slide sfx in menus
 		static void playSlideSFX();
+
+		//Plays select sfx in menus
 		static void playEnterSFX();
+
+		//Plays when player fails game
 		static void playGOLose();
+
+		//Plays when player wins game
 		static void playGOSuccess();
 
 	private:
-
+		//SDL mixer chunk which is the actual sound effect.
 		Mix_Chunk* bSFX;
 	};
 

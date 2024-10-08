@@ -12,6 +12,7 @@ BINI::SoundFX::SoundFX(std::string path)
 
 BINI::SoundFX::~SoundFX()
 {
+	//cleanup
 	if (bSFX != NULL)
 	{
 		Mix_FreeChunk(bSFX);

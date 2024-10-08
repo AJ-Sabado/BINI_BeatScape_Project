@@ -58,7 +58,7 @@ BINI::Scene* currentScene = company;
 
 int main(int argc, char* args[])
 {
-
+	//Game loop
 	while (currentScene->handleEvents(&events) && currentScene != NULL)
 	{
 		//Clears screen
@@ -114,6 +114,7 @@ int main(int argc, char* args[])
 			}
 		}
 
+		//Exits game loop if current scene is null.
 		if (currentScene == NULL)
 		{
 			break;

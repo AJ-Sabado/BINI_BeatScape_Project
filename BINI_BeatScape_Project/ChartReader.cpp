@@ -11,12 +11,14 @@ std::queue<BINI::SongBar*> BINI::ChartReader::loadSong(std::string path)
 
 	std::queue<BINI::SongBar*> song;
 
+	//ends function if file is not found
 	if (!inputFile.is_open())
 	{
 		std::cout << "File not found.\n";
 		return song;
 	}
 
+	//chart file parser
 	while (getline(inputFile, line))
 	{
 		int blankCheck = 0;

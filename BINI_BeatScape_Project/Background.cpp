@@ -9,6 +9,7 @@ BINI::Background::Background(BINI::Renderer* renderer, std::string path)
 
 BINI::Background::~Background()
 {
+	//Cleanup
 	if (bTexture != NULL)
 	{
 		delete bTexture;
