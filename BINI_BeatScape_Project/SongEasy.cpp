@@ -262,7 +262,7 @@ namespace BINI
 			float beatGlide = timer->getTicks() * bps / 1000.f;
 			currentBeat = (int)(beatGlide);
 		}
-		
+
 		//Max Combo Counter
 		if (currentCombo > maxCombo)
 		{
@@ -277,6 +277,7 @@ namespace BINI
 			beat++;
 			beatDuration = songDurationTimer->getTicks();
 			songDurationTimer->start();
+			overlayAlpha = 255;
 			if (beat <= 4)
 				sfx->playSFX();
 			if (!chart.empty() && beat >= 3)
@@ -285,6 +286,12 @@ namespace BINI
 					currentBars.push_back(chart.front());
 				chart.pop();
 			}
+		}
+
+		//OverlayAlpha fadeout
+		if (overlayAlpha > 213)
+		{
+			overlayAlpha -= 1;
 		}
 
 		//Fade in;
@@ -333,7 +340,10 @@ namespace BINI
 
 		//Set Texture Alphas
 		background->setAlpha(sceneAlpha);
-		overlay->setAlpha(sceneAlpha * 5 / 6);
+		if (fadingIn || accuracy < 65.f || beat > 356)
+			overlay->setAlpha(sceneAlpha * 5 / 6);
+		else
+			overlay->setAlpha(overlayAlpha);
 		titlePanel->setAlpha(sceneAlpha);
 		accuracyPanel->setAlpha(sceneAlpha);
 		basebar->setAlpha(sceneAlpha);
@@ -801,7 +811,7 @@ namespace BINI
 				if (accuracy < 65.f) {
 					SoundFX::playGOLose();
 				}
-				if (beat > 872) {
+				else {
 					SoundFX::playGOSuccess();
 				}
 

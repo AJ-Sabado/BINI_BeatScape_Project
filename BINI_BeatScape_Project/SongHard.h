@@ -152,6 +152,8 @@ namespace BINI
 		Uint8 bar4Highlight;
 		Uint8 infoAlpha;
 		Uint8 noteHitAlpha;
+		//overlay opacity
+		Uint8 overlayAlpha = 213;
 
 		//Metronome Calc
 		int beat;

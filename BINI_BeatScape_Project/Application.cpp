@@ -27,7 +27,7 @@ BINI::Application::Application()
 	}
 
 	//Intializes SDL mixer for audio
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 	{
 		std::cout << "SDL mixer failed to initialize! SDL mixer Error: " << Mix_GetError() << "\n";
 		success = false;

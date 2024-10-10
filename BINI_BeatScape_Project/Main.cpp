@@ -58,6 +58,7 @@ BINI::Scene* currentScene = company;
 
 int main(int argc, char* args[])
 {
+
 	//Game loop
 	while (currentScene->handleEvents(&events) && currentScene != NULL)
 	{
